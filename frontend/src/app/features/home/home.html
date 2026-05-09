@@ -1,0 +1,160 @@
+<!-- HERO OSCURO -->
+<section class="w-full bg-neutral-900 text-white rounded-xl p-10 flex flex-col md:flex-row items-center gap-10 shadow-lg">
+
+  <!-- Texto -->
+  <div class="flex-1">
+    <p class="text-blue-400 font-semibold mb-2">NUEVA COLECCIÓN 2026</p>
+
+    <h1 class="text-5xl font-bold leading-tight mb-4">
+      Las mejores zapatillas,<br />
+      a tu medida
+    </h1>
+
+    <p class="text-gray-300 mb-6">
+      Running, basketball, lifestyle y training.<br />
+      Encuentra tu par perfecto.
+    </p>
+
+    <div class="flex gap-4">
+      <a routerLink="/catalog"
+         class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">
+        Ver catálogo
+      </a>
+
+      <a routerLink="/catalog"
+         class="text-white flex items-center gap-2 hover:text-blue-400 transition">
+        Novedades →
+      </a>
+    </div>
+  </div>
+
+  <!-- Imagen + Caja -->
+  <div class="flex-1 flex justify-center relative">
+
+    <!-- Imagen -->
+    <img
+      src="https://i.imgur.com/2yaf2wb.png"
+      alt="Zapatillas"
+      class="w-96 h-auto object-contain drop-shadow-xl"
+    />
+
+    <!-- Caja blanca -->
+    <div class="absolute top-4 right-4 bg-white text-black px-4 py-2 rounded-xl shadow font-semibold">
+      50+ modelos
+    </div>
+  </div>
+
+</section>
+
+<!-- PRODUCTOS DESTACADOS -->
+<section class="mt-20">
+  <h2 class="text-3xl font-bold mb-6">Productos destacados</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+    <!-- Producto 1 -->
+    <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition cursor-pointer">
+      <img src="https://i.imgur.com/2yaf2wb.png" class="h-40 w-full object-contain mb-4" />
+      <p class="text-sm text-blue-600 font-semibold">Running</p>
+      <h3 class="text-lg font-semibold">AirStride Pro</h3>
+      <p class="text-gray-600">129.99 €</p>
+    </div>
+
+    <!-- Producto 2 -->
+    <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition cursor-pointer">
+      <img src="https://i.imgur.com/2yaf2wb.png" class="h-40 w-full object-contain mb-4" />
+      <p class="text-sm text-blue-600 font-semibold">Running</p>
+      <h3 class="text-lg font-semibold">SpeedFlow Elite</h3>
+      <p class="text-gray-600">149.99 €</p>
+    </div>
+
+    <!-- Producto 3 -->
+    <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition cursor-pointer">
+      <img src="https://i.imgur.com/2yaf2wb.png" class="h-40 w-full object-contain mb-4" />
+      <p class="text-sm text-blue-600 font-semibold">Basketball</p>
+      <h3 class="text-lg font-semibold">CourtKing High</h3>
+      <p class="text-gray-600">159.99 €</p>
+    </div>
+
+    <!-- Producto 4 -->
+    <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition cursor-pointer">
+      <img src="https://i.imgur.com/2yaf2wb.png" class="h-40 w-full object-contain mb-4" />
+      <p class="text-sm text-blue-600 font-semibold">Lifestyle</p>
+      <h3 class="text-lg font-semibold">UrbanStep Classic</h3>
+      <p class="text-gray-600">89.99 €</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CATEGORÍAS -->
+<section class="mt-20">
+  <h2 class="text-3xl font-bold mb-6">Comprar por categoría</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+    <!-- Basketball -->
+    <div class="bg-neutral-900 text-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer">
+      <h3 class="text-xl font-semibold mb-2">Basketball</h3>
+      <p class="text-gray-400 mb-4">Calzado con soporte de tobillo para la cancha</p>
+      <span class="text-blue-400">Explorar →</span>
+    </div>
+
+    <!-- Lifestyle -->
+    <div class="bg-neutral-900 text-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer">
+      <h3 class="text-xl font-semibold mb-2">Lifestyle</h3>
+      <p class="text-gray-400 mb-4">Zapatillas urbanas para el día a día</p>
+      <span class="text-blue-400">Explorar →</span>
+    </div>
+
+    <!-- Running -->
+    <div class="bg-neutral-900 text-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer">
+      <h3 class="text-xl font-semibold mb-2">Running</h3>
+      <p class="text-gray-400 mb-4">Zapatillas de alto rendimiento para corredores</p>
+      <span class="text-blue-400">Explorar →</span>
+    </div>
+
+    <!-- Training -->
+    <div class="bg-neutral-900 text-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer">
+      <h3 class="text-xl font-semibold mb-2">Training</h3>
+      <p class="text-gray-400 mb-4">Calzado versátil para el gimnasio</p>
+      <span class="text-blue-400">Explorar →</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="mt-20 bg-neutral-900 text-white p-10 rounded-xl">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+    <div>
+      <h3 class="text-2xl font-bold mb-2">KICKstore</h3>
+      <p class="text-gray-400">Las mejores zapatillas, a tu medida.</p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold mb-2">TIENDA</h4>
+      <ul class="text-gray-400 space-y-1">
+        <li>Catálogo</li>
+        <li>Running</li>
+        <li>Basketball</li>
+        <li>Lifestyle</li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="font-semibold mb-2">MI CUENTA</h4>
+      <ul class="text-gray-400 space-y-1">
+        <li>Iniciar sesión</li>
+        <li>Crear cuenta</li>
+        <li>Mis pedidos</li>
+        <li>Carrito</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <p class="text-gray-500 text-sm mt-10">© 2026 KICKstore. Proyecto educativo.</p>
+</footer>
+
