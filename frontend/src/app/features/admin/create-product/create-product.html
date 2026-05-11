@@ -1,0 +1,18 @@
+<form class="p-6 max-w-xl mx-auto space-y-4" [formGroup]="form" (ngSubmit)="submit()">
+
+    <input type="text" placeholder="Nombre" formControlName="name">
+    <input type="text" placeholder="Slug" formControlName="slug">
+    <input type="number" placeholder="Precio" formControlName="price">
+    <input type="number" placeholder="Stock" formControlName="stock">
+    <input type="text" placeholder="Marca" formControlName="brand">
+    <input type="text" placeholder="ID Categoría" formControlName="category_id">
+
+    <input type="text" placeholder="Tallas (ej: 40,41,42)" formControlName="sizes">
+
+    <input type="file" (change)="onFileSelected($event)">
+
+    <button class="bg-amber-600" type="submit">
+        Crear producto
+    </button>
+
+</form>

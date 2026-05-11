@@ -1,8 +1,18 @@
 <nav class="w-full bg-neutral-900 text-white px-8 py-4 flex items-center justify-between shadow">
-    <div class="text-2xl font-bold tracking-wide">KICKstore</div>
-    <div class="flex items-center gap-8 text-gray-300">
-        <a routerLink="/" class="hover:text-blue-400 transition">Inicio</a>
-        <a routerLink="/catalog" class="hover:text-blue-400 transition">Catálogo</a>
-        <a routerLink="/login" class="border border-gray-500 px-4 py-2 rounded-lg hover:border-blue-400 hover:text-blue-400 transition">Iniciar sesión</a>
-    </div>
+  <div class="text-2xl font-bold">KICKstore</div>
+  <div class="flex items-center gap-8 text-gray-300">
+    <a routerLink="/" class="hover:text-blue-400">Inicio</a>
+    <a routerLink="/catalog" class="hover:text-blue-400">Catálogo</a>
+
+    <ng-container *ngIf="!auth.user()">
+      <a routerLink="/login" class="border border-gray-500 px-4 py-2 rounded-lg hover:border-blue-400 hover:text-blue-400">
+        Iniciar sesión
+      </a>
+    </ng-container>
+
+    <ng-container *ngIf="auth.user()">
+      <span class="text-blue-400">{{ auth.user().email }}</span>
+      <button (click)="logout()" class="hover:text-red-400">Salir</button>
+    </ng-container>
+  </div>
 </nav>
