@@ -17,15 +17,48 @@ export class AuthService {
   }
 
   async login(email: string, password: string) {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email.trim().toLowerCase(),
+      password: password.trim(),
+    });
     if (error) throw error;
     this.user.set(data.user);
     return data.user;
   }
 
-  async register(email: string, password: string) {
-    const { data, error } = await supabase.auth.signUp({ email, password });
-    if (error) throw error;
+  isLogged() {
+    return !!this.user();
+  }
+
+  isAdmin() {
+    return this.user()?.user_metadata?.role === 'admin';
+  }
+
+  isUser() {
+    return this.user()?.user_metadata?.role === 'user';
+  }
+
+  async register(email: string, password: string, fullName?: string) {
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanPassword = password.trim();
+
+    const { data, error } = await supabase.auth.signUp({
+      email: cleanEmail,
+      password: cleanPassword,
+      options: {
+        data: {
+          role: 'user',
+          full_name: fullName ?? '',
+          email_verified: false,
+        },
+      },
+    });
+
+    if (error) {
+      console.error('Supabase signup error:', error);
+      throw error;
+    }
+
     return data.user;
   }
 

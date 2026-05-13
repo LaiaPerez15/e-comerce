@@ -4,14 +4,21 @@
     <a routerLink="/" class="hover:text-blue-400">Inicio</a>
     <a routerLink="/catalog" class="hover:text-blue-400">Catálogo</a>
 
-    <ng-container *ngIf="!auth.user()">
-      <a routerLink="/login" class="border border-gray-500 px-4 py-2 rounded-lg hover:border-blue-400 hover:text-blue-400">
+    <ng-container *ngIf="!auth.isLogged()">
+      <a routerLink="/login"
+        class="border border-gray-500 px-4 py-2 rounded-lg hover:border-blue-400 hover:text-blue-400">
         Iniciar sesión
       </a>
     </ng-container>
 
-    <ng-container *ngIf="auth.user()">
-      <span class="text-blue-400">{{ auth.user().email }}</span>
+    <ng-container *ngIf="auth.isLogged()">
+      <ng-container *ngIf="auth.isAdmin()">
+        <a routerLink="/admin/products" class="hover:text-amber-400">Admin · Productos</a>
+        <a routerLink="/admin/orders" class="hover:text-amber-400">Admin · Pedidos</a>
+      </ng-container>
+
+      <span class="text-blue-400">{{ auth.user().user_metadata?.full_name }}</span>
+
       <button (click)="logout()" class="hover:text-red-400">Salir</button>
     </ng-container>
   </div>

@@ -1,0 +1,92 @@
+<div class="max-w-7xl mx-auto px-8 py-10">
+
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-3xl font-bold text-neutral-900">Gestión de productos</h1>
+
+    <button
+      (click)="openCreate()"
+      class="bg-black text-white px-4 py-2 rounded-lg hover:bg-neutral-800 transition">
+      + Nuevo producto
+    </button>
+  </div>
+
+  <p class="text-neutral-600 mb-6">
+    {{ products.length }} productos en el catálogo
+  </p>
+
+  <!-- LOADING -->
+  <div *ngIf="loading" class="text-neutral-500">Cargando productos...</div>
+
+  <!-- TABLE -->
+  <div *ngIf="!loading" class="bg-white shadow-md rounded-xl overflow-hidden">
+    <table class="w-full text-left">
+      <thead class="bg-neutral-900 text-white text-sm uppercase">
+        <tr>
+          <th class="px-6 py-3">Producto</th>
+          <th class="px-6 py-3">Categoría</th>
+          <th class="px-6 py-3">Precio</th>
+          <th class="px-6 py-3">Stock</th>
+          <th class="px-6 py-3">Estado</th>
+          <th class="px-6 py-3">Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody class="text-neutral-800">
+        <tr *ngFor="let p of products" class="border-b hover:bg-neutral-100 transition">
+
+          <td class="px-6 py-4">
+            <div class="flex items-center gap-4">
+              <img
+                [src]="p.image_url"
+                class="w-14 h-14 rounded-lg object-cover border"
+              />
+
+              <div>
+                <p class="font-semibold">{{ p.name }}</p>
+                <p class="text-sm text-neutral-500">{{ p.brand }}</p>
+              </div>
+            </div>
+          </td>
+
+          <td class="px-6 py-4">{{ p.categories?.name }}</td>
+          <td class="px-6 py-4">{{ p.price }} €</td>
+          <td class="px-6 py-4">{{ p.stock }}</td>
+
+          <td class="px-6 py-4">
+            <span class="px-3 py-1 rounded-full text-sm bg-green-100 text-green-700">
+              Activo
+            </span>
+          </td>
+
+          <td class="px-6 py-4 flex gap-4">
+            <button (click)="openEdit(p)" class="text-blue-600 hover:text-blue-800">
+              Editar
+            </button>
+
+            <button (click)="deleteProduct(p)" class="text-red-600 hover:text-red-800">
+              Eliminar
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- CREATE -->
+<app-create-product
+  [open]="isCreateOpen"
+  [categories]="categories"
+  (closed)="isCreateOpen = false"
+  (created)="loadProducts()"
+></app-create-product>
+
+<!-- EDIT -->
+<app-edit-product
+  [open]="isEditOpen"
+  [product]="selectedProduct"
+  [categories]="categories"
+  (closed)="isEditOpen = false"
+  (updated)="loadProducts()"
+></app-edit-product>

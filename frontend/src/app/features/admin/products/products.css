@@ -1,0 +1,7 @@
+[ng-reflect-ng-if="true"] {
+  transform: translateX(0) !important;
+}
+
+[ng-reflect-ng-if="false"] {
+  transform: translateX(100%) !important;
+}
