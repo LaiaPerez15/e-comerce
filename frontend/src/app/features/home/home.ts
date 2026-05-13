@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AuthService } from '../../core/services/auth.service';
 import { supabase } from '../../core/supabase.client';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -12,17 +12,19 @@ import { supabase } from '../../core/supabase.client';
 })
 export class HomeComponent implements OnInit {
 
-  featuredProducts: any[] = [];
-  loadingFeatured = true;
+  featuredProducts = signal<any[]>([]);
+  loadingFeatured = signal(true);
 
-  constructor(public auth: AuthService) {}
+  constructor(
+    public auth: AuthService
+  ) {}
 
   async ngOnInit() {
     await this.loadFeaturedProducts();
   }
 
   async loadFeaturedProducts() {
-    this.loadingFeatured = true;
+    this.loadingFeatured.set(true);
 
     const { data, error } = await supabase
       .from('products')
@@ -33,11 +35,11 @@ export class HomeComponent implements OnInit {
 
     if (error) {
       console.error('Error cargando productos destacados:', error);
-      this.featuredProducts = [];
+      this.featuredProducts.set([]);
     } else {
-      this.featuredProducts = data || [];
+      this.featuredProducts.set(data || []);
     }
 
-    this.loadingFeatured = false;
+    this.loadingFeatured.set(false);
   }
 }

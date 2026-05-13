@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductsService } from '../../../core/services/products.service';
 import { HttpClient } from '@angular/common/http';
@@ -12,7 +11,6 @@ import { EditProductComponent } from './edit-product/edit-product';
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
     CreateProductComponent,
     EditProductComponent
   ],
@@ -20,15 +18,14 @@ import { EditProductComponent } from './edit-product/edit-product';
 })
 export class Products implements OnInit {
 
-  products: any[] = [];
-  categories: any[] = [];
-  loading = true;
+  products = signal<any[]>([]);
+  categories = signal<any[]>([]);
+  loading = signal(true);
 
-  // Estados de slideovers
-  isCreateOpen = false;
-  isEditOpen = false;
+  isCreateOpen = signal(false);
+  isEditOpen = signal(false);
 
-  selectedProduct: any = null;
+  selectedProduct = signal<any | null>(null);
 
   constructor(
     private productsService: ProductsService,
@@ -41,41 +38,41 @@ export class Products implements OnInit {
     await this.loadProducts();
   }
 
-  // Cargar productos
   async loadProducts() {
-    this.loading = true;
+    this.loading.set(true);
+
     try {
-      this.products = await this.productsService.getAll();
+      const data = await this.productsService.getAll();
+      this.products.set(data);
     } catch (err: any) {
       alert('Error cargando productos: ' + err.message);
     }
-    this.loading = false;
+
+    this.loading.set(false);
   }
 
-  // Cargar categorías desde backend
   async loadCategories() {
     try {
-      this.categories = await this.http
+      const cats = await this.http
         .get<any[]>('http://localhost:3000/categories')
         .toPromise() ?? [];
+
+      this.categories.set(cats);
     } catch (err: any) {
-      this.categories = [];
+      this.categories.set([]);
       alert('Error cargando categorías: ' + err.message);
     }
   }
 
-  // Abrir slideover de crear
   openCreate() {
-    this.isCreateOpen = true;
+    this.isCreateOpen.set(true);
   }
 
-  // Abrir slideover de editar
   openEdit(product: any) {
-    this.selectedProduct = product;
-    this.isEditOpen = true;
+    this.selectedProduct.set(product);
+    this.isEditOpen.set(true);
   }
 
-  // Eliminar producto
   async deleteProduct(p: any) {
     if (!confirm(`¿Eliminar ${p.name}?`)) return;
 

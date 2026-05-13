@@ -1,15 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductsService } from '../../../../core/services/products.service';
+import { FileUrlPipe } from '../../../../shared/pipes/file-url.pipe';
 
 @Component({
   selector: 'app-edit-product',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FileUrlPipe],
   templateUrl: './edit-product.html',
 })
-export class EditProductComponent {
+export class EditProductComponent implements OnChanges {
 
   @Input() open = false;
   @Input() product: any = null;
@@ -18,50 +19,65 @@ export class EditProductComponent {
   @Output() closed = new EventEmitter<void>();
   @Output() updated = new EventEmitter<void>();
 
-  name = '';
-  brand = '';
-  category = '';
-  price: number | null = null;
-  stock: number | null = null;
-
+  form!: FormGroup;
   imageFile: File | null = null;
+  imageName: string | null = null;
 
-  constructor(private productsService: ProductsService) {}
+  constructor(
+    private fb: FormBuilder,
+    private productsService: ProductsService
+  ) {
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      brand: ['', Validators.required],
+      category_id: ['', Validators.required],
+      price: [null, [Validators.required, Validators.min(1)]],
+      stock: [null, [Validators.required, Validators.min(0)]],
+    });
+  }
 
-  ngOnChanges() {
-    if (this.product) {
-      this.name = this.product.name;
-      this.brand = this.product.brand;
-      this.category = this.product.category_id;
-      this.price = this.product.price;
-      this.stock = this.product.stock;
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['product'] && this.product) {
+      this.form.patchValue({
+        name: this.product.name,
+        brand: this.product.brand,
+        category_id: this.product.category_id,
+        price: this.product.price,
+        stock: this.product.stock,
+      });
+
+      this.imageFile = null;
+      this.imageName = null;
     }
   }
 
   close() {
-    this.open = false;
     this.closed.emit();
   }
 
-  onFileSelected(e: any) {
-    this.imageFile = e.target.files[0];
+  onFileSelected(event: any) {
+    this.imageFile = event.target.files[0];
+    this.imageName = this.imageFile?.name ?? null;
   }
 
-  async save(e: Event) {
-    e.preventDefault();
-
-    const form = new FormData();
-    form.append('name', this.name);
-    form.append('brand', this.brand);
-    form.append('category_id', this.category);
-    form.append('price', String(this.price));
-    form.append('stock', String(this.stock));
-
-    if (this.imageFile) {
-      form.append('image', this.imageFile);
+  async save() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
     }
 
-    await this.productsService.updateProduct(this.product.id, form);
+    const formData = new FormData();
+    formData.append('name', this.form.value.name);
+    formData.append('brand', this.form.value.brand);
+    formData.append('category_id', this.form.value.category_id);
+    formData.append('price', this.form.value.price);
+    formData.append('stock', this.form.value.stock);
+
+    if (this.imageFile) {
+      formData.append('image', this.imageFile);
+    }
+
+    await this.productsService.updateProduct(this.product.id, formData);
 
     this.updated.emit();
     this.close();

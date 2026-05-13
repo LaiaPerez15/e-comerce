@@ -7,18 +7,17 @@
             <span class="text-orange-500 text-xs font-bold tracking-[0.3em] uppercase">Toda la colección</span>
             <h1 class="text-5xl font-black text-white mt-1 tracking-tight">Catálogo</h1>
             <p class="text-neutral-400 mt-2">
-                <span class="text-white font-bold">{{ filteredProducts.length }}</span> productos encontrados
+                <span class="text-white font-bold">{{ filteredProducts().length }}</span> productos encontrados
             </p>
         </div>
     </div>
 
     <div class="max-w-7xl mx-auto px-8 py-10 flex gap-8">
-
         <aside class="w-56 shrink-0 hidden lg:block">
             <div class="mb-8">
                 <label class="text-xs font-bold text-neutral-500 uppercase tracking-widest block mb-3">Buscar</label>
                 <div class="relative">
-                    <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()"
+                    <input type="text" [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)"
                         placeholder="Nombre o marca..."
                         class="w-full bg-white border border-neutral-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20 transition pl-9" />
                     <svg class="absolute left-3 top-3 w-4 h-4 text-neutral-400" fill="none" stroke="currentColor"
@@ -32,56 +31,53 @@
             <div>
                 <label class="text-xs font-bold text-neutral-500 uppercase tracking-widest block mb-3">Categoría</label>
                 <div class="flex flex-col gap-1">
-
-                    <button (click)="selectCategory(null)" [class]="selectedCategory === null
-              ? 'w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold bg-neutral-900 text-white transition'
-              : 'w-full text-left px-4 py-2.5 rounded-xl text-sm text-neutral-600 hover:bg-neutral-100 transition'">
+                    <button (click)="selectedCategory.set(null)"
+                        [class]="selectedCategory() === null
+                            ? 'w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold bg-neutral-900 text-white transition'
+                            : 'w-full text-left px-4 py-2.5 rounded-xl text-sm text-neutral-600 hover:bg-neutral-100 transition'">
                         Todas
                     </button>
-
-                    <button *ngFor="let cat of categories" (click)="selectCategory(cat.id)" [class]="selectedCategory === cat.id
-              ? 'w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold bg-neutral-900 text-white transition'
-              : 'w-full text-left px-4 py-2.5 rounded-xl text-sm text-neutral-600 hover:bg-neutral-100 transition'">
+                    <button *ngFor="let cat of categories()" (click)="selectedCategory.set(cat.id)"
+                        [class]="selectedCategory() === cat.id
+                            ? 'w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold bg-neutral-900 text-white transition'
+                            : 'w-full text-left px-4 py-2.5 rounded-xl text-sm text-neutral-600 hover:bg-neutral-100 transition'">
                         {{ cat.name }}
                     </button>
-
                 </div>
             </div>
 
-            <button *ngIf="searchQuery || selectedCategory" (click)="clearFilters()"
+            <button *ngIf="searchQuery() || selectedCategory()" (click)="clearFilters()"
                 class="mt-6 w-full text-xs text-neutral-400 hover:text-orange-500 transition font-medium text-left">
                 × Limpiar filtros
             </button>
-
         </aside>
 
         <div class="flex-1 min-w-0">
-
             <div class="flex items-center justify-between mb-6">
                 <p class="text-sm text-neutral-500">
-                    <span class="font-bold text-neutral-900">{{ filteredProducts.length }}</span> productos
+                    <span class="font-bold text-neutral-900">{{ filteredProducts().length }}</span> productos
                 </p>
 
                 <div class="flex items-center gap-3 lg:hidden">
                     <div class="relative">
-                        <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()"
+                        <input type="text" [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)"
                             placeholder="Buscar..."
                             class="bg-white border border-neutral-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-orange-400 transition" />
                     </div>
-                    <select [(ngModel)]="selectedCategory" (ngModelChange)="applyFilters()"
+                    <select [ngModel]="selectedCategory()" (ngModelChange)="selectedCategory.set($event)"
                         class="bg-white border border-neutral-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-orange-400 transition appearance-none">
                         <option [ngValue]="null">Todas</option>
-                        <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+                        <option *ngFor="let cat of categories()" [value]="cat.id">{{ cat.name }}</option>
                     </select>
                 </div>
             </div>
 
-            <div *ngIf="loading" class="grid grid-cols-2 xl:grid-cols-3 gap-6">
+            <div *ngIf="loading()" class="grid grid-cols-2 xl:grid-cols-3 gap-6">
                 <div *ngFor="let i of [1,2,3,4,5,6]" class="bg-neutral-200 rounded-2xl animate-pulse"
                     style="height: 340px;"></div>
             </div>
 
-            <div *ngIf="!loading && filteredProducts.length === 0"
+            <div *ngIf="!loading() && filteredProducts().length === 0"
                 class="flex flex-col items-center justify-center py-24 text-center">
                 <div class="w-16 h-16 rounded-full bg-neutral-200 flex items-center justify-center text-3xl mb-4">👟
                 </div>
@@ -92,9 +88,8 @@
                 </button>
             </div>
 
-            <div *ngIf="!loading && filteredProducts.length > 0" class="grid grid-cols-2 xl:grid-cols-3 gap-6">
-
-                <a *ngFor="let p of filteredProducts" [routerLink]="['/products', p.id]"
+            <div *ngIf="!loading() && filteredProducts().length > 0" class="grid grid-cols-2 xl:grid-cols-3 gap-6">
+                <a *ngFor="let p of filteredProducts()" [routerLink]="['/products', p.id]"
                     class="group bg-white rounded-2xl overflow-hidden border border-neutral-200 hover:border-orange-400 hover:shadow-xl transition-all duration-300 cursor-pointer">
                     <div class="relative bg-neutral-100 overflow-hidden" style="aspect-ratio: 1;">
                         <span

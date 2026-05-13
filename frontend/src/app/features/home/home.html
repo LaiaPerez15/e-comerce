@@ -1,21 +1,13 @@
-<!-- ═══════════════════════════════════════
-     KICKSTORE · HOME · home.component.html
-     ═══════════════════════════════════════ -->
-
-<!-- ── HERO ──────────────────────────────────────────────────────────── -->
 <section class="relative bg-neutral-950 min-h-[92vh] flex flex-col justify-center overflow-hidden">
 
-  <!-- Texto gigante fondo -->
   <span
-    class="absolute inset-0 flex items-center justify-center text-[22vw] font-black tracking-tighter text-white/[0.03] select-none pointer-events-none leading-none"
+    class="absolute inset-0 flex items-center justify-center text-[22vw] font-black tracking-tighter text-white/3 select-none pointer-events-none leading-none"
     aria-hidden="true">KICKS</span>
 
-  <!-- Línea naranja izquierda -->
   <div class="absolute left-0 top-0 h-full w-1 bg-orange-500"></div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20">
 
-    <!-- LEFT -->
     <div class="flex flex-col gap-6">
       <span class="text-orange-500 text-xs font-bold tracking-[0.3em] uppercase">
         Nueva colección 2026
@@ -43,7 +35,6 @@
         </a>
       </div>
 
-      <!-- Stats -->
       <div class="flex gap-8 mt-6 pt-6 border-t border-neutral-800">
         <div>
           <p class="text-3xl font-black text-white">50+</p>
@@ -62,15 +53,11 @@
       </div>
     </div>
 
-    <!-- RIGHT -->
     <div class="relative flex items-center justify-center">
       <div class="absolute w-80 h-80 rounded-full bg-orange-500/10 blur-3xl"></div>
       <div class="relative">
-        <img
-          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&q=80"
-          alt="Zapatilla destacada"
-          class="relative z-10 w-full max-w-lg object-contain drop-shadow-2xl rotate-[-8deg] hover:rotate-0 transition-transform duration-700"
-        />
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&q=80" alt="Zapatilla destacada"
+          class="relative z-10 w-full max-w-lg object-contain drop-shadow-2xl rotate-[-8deg] hover:rotate-0 transition-transform duration-700" />
         <div class="absolute top-4 right-0 z-20 bg-orange-500 text-white rounded-xl px-4 py-3 text-center shadow-xl">
           <p class="text-2xl font-black leading-none">50+</p>
           <p class="text-[10px] uppercase tracking-widest mt-1">modelos</p>
@@ -79,7 +66,6 @@
     </div>
   </div>
 
-  <!-- Ticker -->
   <div class="border-t border-neutral-800 overflow-hidden py-3 bg-neutral-900/60">
     <div class="flex gap-12 animate-[ticker_20s_linear_infinite] whitespace-nowrap w-max">
       <ng-container *ngFor="let _ of [1,2,3]">
@@ -98,11 +84,8 @@
   </div>
 </section>
 
-
-<!-- ── PRODUCTOS DESTACADOS ───────────────────────────────────────────── -->
 <section class="bg-neutral-50 py-20 px-8">
   <div class="max-w-7xl mx-auto">
-
     <div class="flex items-end justify-between mb-10">
       <div>
         <span class="text-orange-500 text-xs font-bold tracking-[0.3em] uppercase">Lo mejor de la tienda</span>
@@ -114,28 +97,22 @@
       </a>
     </div>
 
-    <!-- Skeletons -->
-    <div *ngIf="loadingFeatured" class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+    <div *ngIf="loadingFeatured()" class="grid grid-cols-2 lg:grid-cols-4 gap-6">
       <div *ngFor="let i of [1,2,3,4]" class="bg-neutral-200 rounded-2xl h-72 animate-pulse"></div>
     </div>
 
-    <!-- Productos -->
-    <div *ngIf="!loadingFeatured" class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-      <a
-        *ngFor="let p of featuredProducts"
-        [routerLink]="['/products', p.id]"
-        class="group bg-white rounded-2xl overflow-hidden border border-neutral-200 hover:border-orange-400 hover:shadow-xl transition-all duration-300 cursor-pointer"
-      >
+    <div *ngIf="!loadingFeatured()" class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+      <a *ngFor="let p of featuredProducts()" [routerLink]="['/products', p.id]"
+        class="group bg-white rounded-2xl overflow-hidden border border-neutral-200 hover:border-orange-400 hover:shadow-xl transition-all duration-300 cursor-pointer">
         <div class="relative bg-neutral-100 overflow-hidden aspect-square">
-          <span class="absolute top-3 left-3 z-10 text-[10px] font-black tracking-widest uppercase bg-neutral-900 text-white px-2.5 py-1 rounded-md">
+          <span
+            class="absolute top-3 left-3 z-10 text-[10px] font-black tracking-widest uppercase bg-neutral-900 text-white px-2.5 py-1 rounded-md">
             {{ p.categories?.name }}
           </span>
-          <img
-            [src]="p.image_url || 'assets/placeholder.jpg'"
-            [alt]="p.name"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">
+          <img [src]="p.image_url || 'assets/placeholder.jpg'" [alt]="p.name"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div
+            class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">
             <span class="bg-orange-500 text-white text-xs font-bold px-4 py-2 rounded-lg shadow">
               Ver producto →
             </span>
@@ -148,14 +125,13 @@
         </div>
       </a>
     </div>
-
   </div>
 </section>
 
-
-<!-- ── BANNER PROMO ───────────────────────────────────────────────────── -->
 <div class="bg-neutral-950 px-8 py-16 relative overflow-hidden">
-  <span class="absolute right-8 top-1/2 -translate-y-1/2 text-[10vw] font-black text-white/[0.04] tracking-tighter select-none pointer-events-none" aria-hidden="true">FREE SHIP</span>
+  <span
+    class="absolute right-8 top-1/2 -translate-y-1/2 text-[10vw] font-black text-white/4 tracking-tighter select-none pointer-events-none"
+    aria-hidden="true">FREE SHIP</span>
   <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
     <div>
       <p class="text-orange-500 text-xs font-bold uppercase tracking-widest mb-2">Oferta permanente</p>
@@ -169,8 +145,6 @@
   </div>
 </div>
 
-
-<!-- ── CATEGORÍAS ─────────────────────────────────────────────────────── -->
 <section class="bg-neutral-900 py-20 px-8">
   <div class="max-w-7xl mx-auto">
     <div class="mb-10">
@@ -187,8 +161,11 @@
       ]">
         <a [routerLink]="['/catalog']" [queryParams]="{ category: cat.slug }"
           class="group relative bg-neutral-800 hover:bg-neutral-750 rounded-2xl p-6 border border-neutral-700 hover:border-orange-500 transition-all duration-300 flex flex-col gap-4 overflow-hidden">
-          <div class="absolute top-0 right-0 w-24 h-24 bg-orange-500/5 rounded-bl-full group-hover:bg-orange-500/10 transition"></div>
-          <div class="w-10 h-10 rounded-xl bg-neutral-700 group-hover:bg-orange-500/20 transition flex items-center justify-center text-xl">
+          <div
+            class="absolute top-0 right-0 w-24 h-24 bg-orange-500/5 rounded-bl-full group-hover:bg-orange-500/10 transition">
+          </div>
+          <div
+            class="w-10 h-10 rounded-xl bg-neutral-700 group-hover:bg-orange-500/20 transition flex items-center justify-center text-xl">
             {{ cat.emoji }}
           </div>
           <div>
@@ -202,11 +179,8 @@
   </div>
 </section>
 
-
-<!-- ── FOOTER ─────────────────────────────────────────────────────────── -->
 <footer class="bg-neutral-950 border-t border-neutral-800 px-8 pt-14 pb-8">
   <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
-
     <div>
       <p class="text-2xl font-black text-white">KICK<span class="text-orange-500">store</span></p>
       <p class="text-neutral-400 text-sm mt-3 leading-relaxed max-w-xs">
@@ -218,9 +192,12 @@
       <h4 class="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-4">Tienda</h4>
       <div class="flex flex-col gap-2">
         <a routerLink="/catalog" class="text-neutral-300 hover:text-orange-500 text-sm transition">Catálogo</a>
-        <a [routerLink]="['/catalog']" [queryParams]="{ category: 'running' }" class="text-neutral-300 hover:text-orange-500 text-sm transition">Running</a>
-        <a [routerLink]="['/catalog']" [queryParams]="{ category: 'basketball' }" class="text-neutral-300 hover:text-orange-500 text-sm transition">Basketball</a>
-        <a [routerLink]="['/catalog']" [queryParams]="{ category: 'lifestyle' }" class="text-neutral-300 hover:text-orange-500 text-sm transition">Lifestyle</a>
+        <a [routerLink]="['/catalog']" [queryParams]="{ category: 'running' }"
+          class="text-neutral-300 hover:text-orange-500 text-sm transition">Running</a>
+        <a [routerLink]="['/catalog']" [queryParams]="{ category: 'basketball' }"
+          class="text-neutral-300 hover:text-orange-500 text-sm transition">Basketball</a>
+        <a [routerLink]="['/catalog']" [queryParams]="{ category: 'lifestyle' }"
+          class="text-neutral-300 hover:text-orange-500 text-sm transition">Lifestyle</a>
       </div>
     </div>
 
@@ -241,11 +218,3 @@
     <p class="text-neutral-600 text-xs">© 2026 KICKstore. Todos los derechos reservados.</p>
   </div>
 </footer>
-
-<!--
-  ── TAILWIND CONFIG (tailwind.config.js) ──────────────────────────────
-  theme: { extend: {
-    keyframes: { ticker: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } } },
-    animation:  { ticker: 'ticker 20s linear infinite' }
-  }}
--->

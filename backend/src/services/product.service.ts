@@ -26,7 +26,6 @@ export class ProductService {
   }
 
   static async create(body: any, file?: Express.Multer.File) {
-
     let image_url = null;
 
     if (file) {
@@ -65,8 +64,17 @@ export class ProductService {
   }
 
   static async update(id: string, body: any, file?: Express.Multer.File) {
+    const { data: existing, error: existingError } = await supabase
+      .from('products')
+      .select('*')
+      .eq('id', id)
+      .single();
 
-    let image_url = body.image_url || null;
+    if (existingError || !existing) {
+      throw new Error('Producto no encontrado');
+    }
+
+    let image_url = existing.image_url;
 
     if (file) {
       const upload = await cloudinary.uploader.upload(file.path, {

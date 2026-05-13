@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -13,14 +13,31 @@ import { supabase } from '../../core/supabase.client';
 })
 export class CatalogComponent implements OnInit {
 
-  products: any[] = [];
-  filteredProducts: any[] = [];
-  categories: any[] = [];
+  products = signal<any[]>([]);
+  categories = signal<any[]>([]);
+  loading = signal(true);
 
-  loading = true;
+  searchQuery = signal('');
+  selectedCategory = signal<string | null>(null);
 
-  searchQuery: string = '';
-  selectedCategory: string | null = null;
+  filteredProducts = computed(() => {
+    let result = [...this.products()];
+
+    const q = this.searchQuery().toLowerCase();
+
+    if (q.trim() !== '') {
+      result = result.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.brand.toLowerCase().includes(q)
+      );
+    }
+
+    if (this.selectedCategory()) {
+      result = result.filter(p => p.category_id === this.selectedCategory());
+    }
+
+    return result;
+  });
 
   constructor(private http: HttpClient) {}
 
@@ -29,25 +46,21 @@ export class CatalogComponent implements OnInit {
     await this.loadProducts();
   }
 
-  // ───────────────────────────────────────────────
-  // Cargar categorías desde tu backend
-  // ───────────────────────────────────────────────
   async loadCategories() {
     try {
-      this.categories = await this.http
+      const cats = await this.http
         .get<any[]>('http://localhost:3000/categories')
         .toPromise() ?? [];
+
+      this.categories.set(cats);
     } catch (err) {
       console.error('Error cargando categorías', err);
-      this.categories = [];
+      this.categories.set([]);
     }
   }
 
-  // ───────────────────────────────────────────────
-  // Cargar productos desde Supabase
-  // ───────────────────────────────────────────────
   async loadProducts() {
-    this.loading = true;
+    this.loading.set(true);
 
     const { data, error } = await supabase
       .from('products')
@@ -57,52 +70,20 @@ export class CatalogComponent implements OnInit {
 
     if (error) {
       console.error('Error cargando productos:', error);
-      this.products = [];
+      this.products.set([]);
     } else {
-      this.products = data || [];
+      this.products.set(data || []);
     }
 
-    this.applyFilters();
-    this.loading = false;
+    this.loading.set(false);
   }
 
-  // ───────────────────────────────────────────────
-  // Aplicar filtros (búsqueda + categoría)
-  // ───────────────────────────────────────────────
-  applyFilters() {
-    let result = [...this.products];
-
-    // Filtro por búsqueda
-    if (this.searchQuery.trim() !== '') {
-      const q = this.searchQuery.toLowerCase();
-      result = result.filter(p =>
-        p.name.toLowerCase().includes(q) ||
-        p.brand.toLowerCase().includes(q)
-      );
-    }
-
-    // Filtro por categoría
-    if (this.selectedCategory) {
-      result = result.filter(p => p.category_id === this.selectedCategory);
-    }
-
-    this.filteredProducts = result;
-  }
-
-  // ───────────────────────────────────────────────
-  // Seleccionar categoría
-  // ───────────────────────────────────────────────
   selectCategory(catId: string | null) {
-    this.selectedCategory = catId;
-    this.applyFilters();
+    this.selectedCategory.set(catId);
   }
 
-  // ───────────────────────────────────────────────
-  // Limpiar filtros
-  // ───────────────────────────────────────────────
   clearFilters() {
-    this.searchQuery = '';
-    this.selectedCategory = null;
-    this.applyFilters();
+    this.searchQuery.set('');
+    this.selectedCategory.set(null);
   }
 }
