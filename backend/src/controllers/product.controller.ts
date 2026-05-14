@@ -45,8 +45,6 @@ export class ProductController {
     try {
       const id = req.params.id;
 
-      console.log("ID RECIBIDO:", id);
-
       const product = await ProductService.softDelete(id);
       res.json(product);
     } catch (err: any) {

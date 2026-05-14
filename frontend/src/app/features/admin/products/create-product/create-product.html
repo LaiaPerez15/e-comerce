@@ -17,6 +17,10 @@
                     <span class="mt-2 text-sm text-neutral-500">Haz clic para subir una imagen</span>
                     <input type="file" class="hidden" (change)="onFileSelected($event)" />
                 </label>
+
+                <p *ngIf="imageName" class="text-sm text-neutral-600 mt-2">
+                    Archivo seleccionado: <strong>{{ imageName }}</strong>
+                </p>
             </div>
 
             <div>

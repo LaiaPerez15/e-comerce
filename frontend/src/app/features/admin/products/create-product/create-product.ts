@@ -19,6 +19,7 @@ export class CreateProductComponent implements OnChanges {
 
   form!: FormGroup;
   imageFile: File | null = null;
+  imageName: string | null = null;
 
   constructor(private fb: FormBuilder, private productsService: ProductsService) {
     this.form = this.fb.group({
@@ -33,7 +34,9 @@ export class CreateProductComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['open'] && this.open) {
       this.form.reset();
+      this.form.patchValue({ category_id: '' });
       this.imageFile = null;
+      this.imageName = null;
     }
   }
 
@@ -43,6 +46,7 @@ export class CreateProductComponent implements OnChanges {
 
   onFileSelected(event: any) {
     this.imageFile = event.target.files[0];
+    this.imageName = this.imageFile ? this.imageFile.name : null;
   }
 
   async save() {

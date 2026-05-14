@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import productRoutes from './routes/product.routes';
+import orderRoutes from './routes/order.routes';
 import categoryRoutes from './routes/category.routes';
 import uploadRoutes from './routes/upload.routes';
 
@@ -24,6 +25,7 @@ app.listen(PORT, () => {
 });
 
 app.use('/products', productRoutes);
+app.use('/orders', orderRoutes);
 app.use('/categories', categoryRoutes);
 app.use('/upload', uploadRoutes);
 
