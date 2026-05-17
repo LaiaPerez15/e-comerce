@@ -1,5 +1,5 @@
 import { Component,  } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 
@@ -11,9 +11,13 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './navbar.css',
 })
 export class NavbarComponent {
-  constructor(public auth: AuthService) {}
+  constructor(
+    public auth: AuthService,
+    private router: Router
+  ) {}
 
-  logout() {
-    this.auth.logout();
+  async logout() {
+    await this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

@@ -21,6 +21,30 @@ export class ProductsService {
     return data;
   }
 
+  // Obtener producto por ID (detalle)
+  async getById(productId: string) {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*, categories(name)')
+      .eq('id', productId)
+      .single();
+
+    if (error) throw error;
+    return data;
+  }
+
+  // Obtener product por slug (detalle)
+  async getBySlug(productSlug: string) {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*, categories(name)')
+      .eq('slug', productSlug)
+      .single();
+
+    if (error) throw error;
+    return data;
+  }
+
   // Crear producto (usa backend)
   async createProduct(formData: FormData) {
     return await firstValueFrom(

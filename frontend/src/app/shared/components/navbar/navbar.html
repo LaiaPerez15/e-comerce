@@ -17,6 +17,14 @@
         <a routerLink="/admin/orders" class="hover:text-amber-400">Admin · Pedidos</a>
       </ng-container>
 
+      <ng-container *ngIf="auth.isUser()">
+        <a routerLink="/orders" class="hover:text-blue-400">Mis pedidos</a>
+        <button routerLink="/cart" class="relative">
+          <span class="material-icons text-2xl">shopping_bag</span>
+          <span *ngIf="5 > 0" class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">5</span>
+        </button>
+      </ng-container>
+
       <span class="text-blue-400">{{ auth.user().user_metadata?.full_name }}</span>
 
       <button (click)="logout()" class="hover:text-red-400">Salir</button>

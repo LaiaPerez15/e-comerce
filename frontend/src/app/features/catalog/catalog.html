@@ -100,11 +100,8 @@
                         <img [src]="p.image_url || 'assets/placeholder.jpg'" [alt]="p.name"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
 
-                        <div
-                            class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">
-                            <span class="bg-orange-500 text-white text-xs font-bold px-5 py-2 rounded-lg shadow-lg">
-                                Ver producto →
-                            </span>
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">
+                            <a [routerLink]="['/product', p.id]" class="bg-orange-500 text-white text-xs font-bold px-5 py-2 rounded-lg shadow-lg">Ver producto →</a>
                         </div>
                     </div>
 
