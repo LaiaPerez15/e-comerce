@@ -1,44 +1,67 @@
 <div class="flex-1 flex items-center justify-center px-4 py-10">
-    <form (submit)="onSubmit($event)" class="bg-white shadow-xl rounded-xl p-8 w-full max-w-md space-y-6">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white shadow-xl rounded-xl p-8 w-full max-w-md space-y-6">
 
-        <h1 class="text-2xl font-bold text-start">KICKstore</h1>
-        <p class="text-start text-xl font-bold text-zinc-500">Crea tu cuenta</p>
-        <p class="text-start text-zinc-400 text-sm">Empieza a comprar hoy</p>
+        <h1 class="text-3xl font-bold text-orange-500">KICKstore</h1>
+        <p class="text-xl font-bold mb-2">Crea tu cuenta</p>
+        <p class="text-zinc-400 text-sm mt-0">Empieza a comprar hoy</p>
 
         <div class="space-y-4">
             <div>
-                <label class="text-sm text-zinc-600">Nombre completo</label>
-                <input type="text" [(ngModel)]="name" name="name"
-                    class="w-full bg-zinc-100 px-4 py-2 rounded-lg border border-zinc-300" placeholder="Alizon Rosales"
-                    required />
+                <label class="block text-sm font-medium mb-1">Nombre completo</label>
+                <input type="text" formControlName="name"
+                    class="w-full bg-zinc-100 px-4 py-2 rounded-lg border border-zinc-300" />
+
+                <p *ngIf="form.controls['name'].touched && form.controls['name'].invalid"
+                    class="text-red-600 text-xs mt-1">
+                    El nombre es obligatorio.
+                </p>
             </div>
 
             <div>
-                <label class="text-sm text-zinc-600">Email</label>
-                <input type="email" [(ngModel)]="email" name="email"
-                    class="w-full bg-zinc-100 px-4 py-2 rounded-lg border border-zinc-300" placeholder="tu@email.com"
-                    required />
+                <label class="block text-sm font-medium mb-1">Email</label>
+                <input type="email" formControlName="email"
+                    class="w-full bg-zinc-100 px-4 py-2 rounded-lg border border-zinc-300" />
+
+                <p *ngIf="form.controls['email'].touched && form.controls['email'].hasError('required')"
+                    class="text-red-600 text-xs mt-1">
+                    El email es obligatorio.
+                </p>
+
+                <p *ngIf="form.controls['email'].touched && form.controls['email'].hasError('email')"
+                    class="text-red-600 text-xs mt-1">
+                    Ingresa un email válido.
+                </p>
             </div>
 
             <div>
-                <label class="text-sm text-zinc-600">Contraseña</label>
-                <input type="password" [(ngModel)]="password" name="password"
-                    class="w-full bg-zinc-100 px-4 py-2 rounded-lg border border-zinc-300"
-                    placeholder="Mínimo 6 caracteres" required />
+                <label class="block text-sm font-medium mb-1">Contraseña</label>
+                <input type="password" formControlName="password"
+                    class="w-full bg-zinc-100 px-4 py-2 rounded-lg border border-zinc-300" />
+
+                <p *ngIf="form.controls['password'].touched && form.controls['password'].invalid"
+                    class="text-red-600 text-xs mt-1">
+                    La contraseña debe tener mínimo 6 caracteres.
+                </p>
             </div>
 
             <div>
-                <label class="text-sm text-zinc-600">Confirmar contraseña</label>
-                <input type="password" [(ngModel)]="passwordConfirm" name="passwordConfirm"
-                    class="w-full bg-zinc-100 px-4 py-2 rounded-lg border border-zinc-300"
-                    placeholder="Repite la contraseña" required />
+                <label class="block text-sm font-medium mb-1">Confirmar contraseña</label>
+                <input type="password" formControlName="passwordConfirm"
+                    class="w-full bg-zinc-100 px-4 py-2 rounded-lg border border-zinc-300" />
+
+                <p *ngIf="form.controls['passwordConfirm'].touched && form.controls['passwordConfirm'].invalid"
+                    class="text-red-600 text-xs mt-1">
+                    Debes confirmar la contraseña.
+                </p>
             </div>
 
-            <button class="w-full bg-black text-white py-2 rounded-lg hover:bg-zinc-900">
+            <p *ngIf="errorGeneral" class="text-center text-sm text-red-500">
+                {{ errorGeneral }}
+            </p>
+
+            <button class="w-full bg-black text-white py-2 rounded-lg hover:bg-neutral-800">
                 Crear cuenta
             </button>
-
-            <p class="text-center text-sm text-red-500">{{ error }}</p>
 
             <p class="text-center text-sm text-zinc-500">
                 ¿Ya tienes cuenta?
@@ -46,8 +69,6 @@
                     Inicia sesión
                 </a>
             </p>
-
         </div>
-
     </form>
 </div>

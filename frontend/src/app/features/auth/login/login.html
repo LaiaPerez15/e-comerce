@@ -1,25 +1,44 @@
 <div class="flex-1 flex items-center justify-center px-4 py-10">
-  <form (submit)="onSubmit($event)" class="bg-white shadow-xl rounded-xl p-8 w-full max-w-md space-y-6">
-    
-    <h1 class="text-2xl font-bold text-start">KICKstore</h1>
-    <p class="text-start text-xl font-bold text-zinc-500">Bienvenid@ de nuevo</p>
-    <p class="text-start text-zinc-400 text-sm">Inicia sesión para continuar</p>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white shadow-xl rounded-xl p-8 w-full max-w-md space-y-6">
+
+    <h1 class="text-3xl font-bold text-orange-500">KICKstore</h1>
+    <p class="text-xl font-bold mb-2">Bienvenido de nuevo</p>
+    <p class="text-zinc-400 text-sm mt-0">Inicia sesión para continuar</p>
 
     <div class="space-y-4">
       <div>
-        <label class="text-sm text-zinc-600">Email</label>
-        <input type="email" [(ngModel)]="email" name="email"
-          class="w-full bg-zinc-100 px-4 py-2 rounded-lg border border-zinc-300" placeholder="admin@test.com"
-          required />
+        <label class="block text-sm font-medium mb-1">Email</label>
+        <input type="email" formControlName="email"
+          class="w-full bg-zinc-100 px-4 py-2 rounded-lg border border-zinc-300" />
+
+        <p *ngIf="form.controls['email'].touched && form.controls['email'].hasError('required')"
+          class="text-red-600 text-xs mt-1">
+          El email es obligatorio.
+        </p>
+
+        <p *ngIf="form.controls['email'].touched && form.controls['email'].hasError('email')"
+          class="text-red-600 text-xs mt-1">
+          Ingresa un email válido.
+        </p>
       </div>
 
       <div>
-        <label class="text-sm text-zinc-600">Contraseña</label>
-        <input type="password" [(ngModel)]="password" name="password"
-          class="w-full bg-zinc-100 px-4 py-2 rounded-lg border border-zinc-300" placeholder="••••••" required />
+        <label class="block text-sm font-medium mb-1">Contraseña</label>
+        <input type="password" formControlName="password"
+          class="w-full bg-zinc-100 px-4 py-2 rounded-lg border border-zinc-300" />
+
+        <p *ngIf="form.controls['password'].touched && form.controls['password'].invalid"
+          class="text-red-600 text-xs mt-1">
+          La contraseña es obligatoria.
+        </p>
       </div>
 
-      <button class="w-full bg-black text-white py-2 rounded-lg hover:bg-zinc-900">
+      <p *ngIf="form.controls['email'].touched && form.controls['email'].hasError('invalidCredentials')"
+        class="text-center text-sm text-red-500">
+        Credenciales incorrectas.
+      </p>
+
+      <button class="w-full bg-black text-white py-2 rounded-lg hover:bg-neutral-800">
         Iniciar sesión
       </button>
 

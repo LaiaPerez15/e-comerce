@@ -1,27 +1,53 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../../core/services/auth.service';
+import { FormBuilder, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
 })
 export class LoginComponent {
-  email = '';
-  password = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  form!: FormGroup;
+  errorGeneral = '';
 
-  async onSubmit(e: Event) {
-    e.preventDefault();
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+    });
+  }
+
+  async onSubmit() {
+    this.errorGeneral = '';
+
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const { email, password } = this.form.value;
+
     try {
-      await this.auth.login(this.email, this.password);
-      this.router.navigateByUrl('/');
+      await this.auth.login(email!, password!);
+      this.router.navigate(['/']);
     } catch (err: any) {
-      alert(err.message);
+      const msg = err.message || err.error_description || '';
+
+      if (msg.includes('Invalid login credentials')) {
+        this.form.controls['email'].setErrors({ invalidCredentials: true });
+        return;
+      }
+
+      this.errorGeneral = 'Ha ocurrido un error inesperado';
     }
   }
 }

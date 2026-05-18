@@ -1,37 +1,53 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../../core/services/auth.service';
+import { FormBuilder, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './register.html',
 })
 export class RegisterComponent {
-  name = '';
-  email = '';
-  password = '';
-  passwordConfirm = '';
-  error = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  form!: FormGroup;
+  errorGeneral = '';
 
-  async onSubmit(e: Event) {
-    e.preventDefault();
-    this.error = '';
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      passwordConfirm: ['', Validators.required],
+    });
+  }
 
-    if (this.password !== this.passwordConfirm) {
-      this.error = 'Las contraseñas no coinciden';
+  async onSubmit() {
+    this.errorGeneral = '';
+
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const { name, email, password, passwordConfirm } = this.form.value;
+
+    if (password !== passwordConfirm) {
+      this.errorGeneral = 'Las contraseñas no coinciden';
       return;
     }
 
     try {
-      await this.auth.register(this.email, this.password, this.name);
-      this.router.navigateByUrl('/login');
+      await this.auth.register(email!, password!, name!);
+      this.router.navigate(['/login']);
     } catch (err: any) {
-      this.error = err.message;
+      this.errorGeneral = err.message;
     }
   }
 }
