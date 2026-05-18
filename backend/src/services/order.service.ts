@@ -5,7 +5,17 @@ export class OrderService {
   static async getAll() {
     const { data, error } = await supabase
       .from('orders')
-      .select('*, order_items(*), profiles(email)')
+      .select(`
+        *,
+        profiles(*),
+        order_items(
+          id,
+          quantity,
+          unit_price,
+          size,
+          product:products(name, image_url)
+        )
+      `)
       .order('created_at', { ascending: false });
 
     if (error) throw error;
@@ -15,7 +25,17 @@ export class OrderService {
   static async getById(id: string) {
     const { data, error } = await supabase
       .from('orders')
-      .select('*, order_items(*), profiles(email)')
+      .select(`
+        *,
+        profiles(*),
+        order_items(
+          id,
+          quantity,
+          unit_price,
+          size,
+          product:products(name, image_url)
+        )
+      `)
       .eq('id', id)
       .single();
 

@@ -1,9 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 
 export function isAdmin(req: Request, res: Response, next: NextFunction) {
-  const role = req.headers['x-user-role'];
+  const user = (req as any).user;
 
-  if (role !== 'admin') {
+  console.log("USER:", user);
+
+  if (!user || user.app_metadata.role !== 'admin') {
     return res.status(403).json({ error: 'Acceso denegado' });
   }
 
