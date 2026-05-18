@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { supabase } from '../../core/supabase.client';
+import { supabase } from '../../../core/supabase.client';
 
 @Component({
   selector: 'app-catalog',

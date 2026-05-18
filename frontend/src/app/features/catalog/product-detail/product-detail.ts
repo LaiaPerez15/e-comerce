@@ -2,6 +2,8 @@ import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../../../core/services/products.service';
+import { CartService } from '../../../core/services/cart.service';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -18,7 +20,9 @@ export class ProductDetail implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private cartService: CartService,
+    private toast: ToastService
   ) {}
 
   async ngOnInit() {
@@ -42,10 +46,22 @@ export class ProductDetail implements OnInit {
   }
 
   addToCart() {
-    console.log('Añadir al carrito:', {
-      product: this.product(),
-      size: this.selectedSize(),
+    if (!this.selectedSize()) {
+      this.toast.show('Selecciona una talla');
+      return;
+    }
+
+    const p = this.product();
+
+    this.cartService.addItem({
+      id: p.id,
+      size: this.selectedSize()!,
+      name: p.name + ' (Talla ' + this.selectedSize() + ')',
+      price: p.price,
+      image: p.image_url,
       quantity: this.quantity()
     });
+
+    this.toast.show('Producto añadido al carrito');
   }
 }

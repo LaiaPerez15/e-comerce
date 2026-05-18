@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home';
-import { CatalogComponent } from './features/catalog/catalog';
 import { LoginComponent } from './features/auth/login/login';
 import { RegisterComponent } from './features/auth/register/register';
 import { PublicLayoutComponent } from './layouts/public/public';
@@ -11,6 +10,7 @@ import { OrderDetail } from './features/orders/order-detail/order-detail';
 import { Cart } from './features/cart/cart/cart';
 import { Checkout } from './features/checkout/checkout/checkout';
 import { ProductDetail } from './features/catalog/product-detail/product-detail';
+import { CatalogComponent } from './features/catalog/catalog/catalog';
 
 export const routes: Routes = [
     {

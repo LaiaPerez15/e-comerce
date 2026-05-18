@@ -1,9 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { supabase } from '../supabase.client';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   user = signal<any>(null);
 

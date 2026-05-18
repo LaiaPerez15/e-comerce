@@ -21,7 +21,9 @@
         <a routerLink="/orders" class="hover:text-blue-400">Mis pedidos</a>
         <button routerLink="/cart" class="relative">
           <span class="material-icons text-2xl">shopping_bag</span>
-          <span *ngIf="5 > 0" class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">5</span>
+           <span *ngIf="totalItems >= 0" class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">
+            {{ totalItems }}
+           </span>
         </button>
       </ng-container>
 

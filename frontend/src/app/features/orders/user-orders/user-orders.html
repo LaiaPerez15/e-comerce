@@ -38,30 +38,79 @@
     </div>
 
     <div *ngIf="!loading() && orders().length > 0" class="space-y-6">
-      <div *ngFor="let o of orders()" class="bg-white border border-neutral-200 rounded-2xl p-6 shadow-sm">
-
-        <div class="flex justify-between items-center">
+      <div *ngFor="let o of orders()" class="bg-white border border-neutral-200 rounded-2xl shadow-sm">
+        <div class="p-6 flex justify-between items-center cursor-pointer" (click)="o.open = !o.open">
           <div>
             <p class="font-black text-neutral-900 text-lg">Pedido #{{ o.id }}</p>
             <p class="text-neutral-500 text-sm">{{ o.created_at | date:'dd/MM/yyyy HH:mm' }}</p>
           </div>
 
-          <span class="px-3 py-1 rounded-full text-xs font-bold" [ngClass]="{
-                  'bg-yellow-100 text-yellow-700': o.status === 'pending',
-                  'bg-blue-100 text-blue-700': o.status === 'processing',
-                  'bg-green-100 text-green-700': o.status === 'completed'
-                }">
-            {{ o.status }}
-          </span>
+          <div class="flex items-center gap-4">
+
+            <p class="font-bold text-neutral-900">
+              {{ o.total_amount }} €
+            </p>
+
+            <span class="px-3 py-1 rounded-full text-xs font-bold"
+                  [ngClass]="{
+                    'bg-yellow-100 text-yellow-700': o.status === 'pending',
+                    'bg-blue-100 text-blue-700': o.status === 'confirmed',
+                    'bg-purple-100 text-purple-700': o.status === 'shipped',
+                    'bg-green-100 text-green-700': o.status === 'delivered',
+                    'bg-red-100 text-red-700': o.status === 'cancelled'
+                  }">
+              {{
+                o.status === 'pending' ? 'Pendiente' :
+                o.status === 'confirmed' ? 'Confirmado' :
+                o.status === 'shipped' ? 'Enviado' :
+                o.status === 'delivered' ? 'Entregado' :
+                o.status === 'cancelled' ? 'Cancelado' :
+                o.status
+              }}
+            </span>
+
+            <span class="material-symbols-outlined text-neutral-500">
+              {{ o.open ? 'expand_less' : 'expand_more' }}
+            </span>
+          </div>
         </div>
 
-        <div class="mt-4 text-neutral-700">
-          <p class="font-bold">Total: {{ o.total }} €</p>
-        </div>
+        <div *ngIf="o.open" class="px-6 pb-6 border-t border-neutral-200">
+          <div class="space-y-4 mt-4">
+            <div *ngFor="let item of o.items"
+                class="flex items-center justify-between bg-neutral-50 border border-neutral-200 rounded-xl p-4">
 
-        <button routerLink="/orders/{{ o.id }}" class="mt-4 text-orange-600 hover:text-orange-500 font-medium text-sm">
-          Ver detalles →
-        </button>
+              <div class="flex items-center gap-4">
+                <img [src]="item.product.image_url" class="w-16 h-16 rounded-lg object-cover border border-neutral-300" />
+
+                <div>
+                  <p class="font-black text-neutral-900">{{ item.product.name }}</p>
+
+                  <p class="text-neutral-500 text-sm flex items-center gap-3">
+                    <span>Talla: {{ item.size }}</span>
+                    <span>Cantidad: {{ item.quantity }}</span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="text-right">
+                <p class="font-bold text-neutral-900">
+                  {{ item.unit_price * item.quantity }} €
+                </p>
+                <p class="text-neutral-500 text-xs">
+                  {{ item.unit_price }} € c/u
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <p class="text-sm font-semibold text-neutral-700">Dirección de envío</p>
+            <p class="text-neutral-600 mt-1 whitespace-pre-line">
+              {{ o.shipping_address }}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

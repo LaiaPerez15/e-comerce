@@ -22,7 +22,7 @@ export class OrderDetail implements OnInit {
 
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id')!;
-    const data = await this.ordersService.getById(id);
+    const data = await this.ordersService.getOrderById(id);
     this.order.set(data);
     this.loading.set(false);
   }

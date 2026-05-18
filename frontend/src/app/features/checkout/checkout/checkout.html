@@ -1,1 +1,94 @@
-<p>checkout works!</p>
+<div class="min-h-screen bg-neutral-100 px-8 py-12">
+  <div class="max-w-7xl mx-auto mb-10">
+    <div class="flex items-center justify-between">
+      <div>
+        <span class="text-orange-500 text-xs font-bold tracking-[0.3em] uppercase">
+          Usuario
+        </span>
+        <h1 class="text-4xl font-black text-neutral-900 mt-1 tracking-tight">
+          Finalizar pedido
+        </h1>
+      </div>
+
+      <a routerLink="/catalog" class="text-neutral-600 hover:text-neutral-900 text-sm">
+        Seguir comprando →
+      </a>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
+    <div class="lg:col-span-2 bg-white border border-neutral-200 rounded-2xl p-8 shadow-sm">
+
+      <h2 class="text-xl font-black text-neutral-900 mb-6">Dirección de envío</h2>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-5">
+        <div>
+          <label class="text-sm font-semibold text-neutral-700">Nombre completo *</label>
+          <input formControlName="full_name" class="w-full mt-1 px-4 py-2.5 border border-neutral-300 rounded-lg bg-neutral-50" />
+          <p *ngIf="isInvalid('full_name')" class="text-red-600 text-xs mt-1">
+            El nombre es obligatorio.
+          </p>
+        </div>
+
+        <div>
+          <label class="text-sm font-semibold text-neutral-700">Dirección *</label>
+          <input formControlName="address" class="w-full mt-1 px-4 py-2.5 border border-neutral-300 rounded-lg bg-neutral-50" />
+          <p *ngIf="isInvalid('address')" class="text-red-600 text-xs mt-1">
+            La dirección es obligatoria.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <label class="text-sm font-semibold text-neutral-700">Ciudad *</label>
+            <input formControlName="city" class="w-full mt-1 px-4 py-2.5 border border-neutral-300 rounded-lg bg-neutral-50" />
+            <p *ngIf="isInvalid('city')" class="text-red-600 text-xs mt-1">
+              La ciudad es obligatoria.
+            </p>
+          </div>
+
+          <div>
+            <label class="text-sm font-semibold text-neutral-700">Código postal *</label>
+            <input formControlName="postal_code" class="w-full mt-1 px-4 py-2.5 border border-neutral-300 rounded-lg bg-neutral-50" />
+            <p *ngIf="isInvalid('postal_code')" class="text-red-600 text-xs mt-1">
+              El código postal es obligatorio.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm font-semibold text-neutral-700">Notas (opcional)</label>
+          <textarea formControlName="notes" class="w-full mt-1 px-4 py-2.5 border border-neutral-300 rounded-lg bg-neutral-50 h-24 resize-none"></textarea>
+        </div>
+
+        <button type="submit"
+                class="mt-4 w-full bg-black text-white font-bold py-3.5 rounded-xl hover:bg-neutral-800 transition shadow-sm">
+          Confirmar pedido
+        </button>
+      </form>
+    </div>
+
+    <div class="bg-white border border-neutral-200 rounded-2xl p-8 shadow-sm h-fit">
+      <h3 class="text-xl font-black text-neutral-900 mb-4">Resumen del pedido</h3>
+
+      <div class="space-y-2 text-neutral-700">
+        <p class="flex justify-between">
+          <span>Productos ({{ items.length }})</span>
+          <span>{{ subtotal }} €</span>
+        </p>
+
+        <p class="flex justify-between">
+          <span>Envío</span>
+          <span class="font-medium text-green-600">Gratis</span>
+        </p>
+
+        <hr class="my-4">
+
+        <p class="flex justify-between text-lg font-black text-neutral-900">
+          <span>Total</span>
+          <span>{{ subtotal }} €</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
