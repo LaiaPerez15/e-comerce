@@ -19,9 +19,13 @@ export class AuthService {
       email: email.trim().toLowerCase(),
       password: password.trim(),
     });
+
     if (error) throw error;
-    this.user.set(data.user);
-    return data.user;
+
+    const refreshed = await supabase.auth.getUser();
+    this.user.set(refreshed.data.user);
+
+    return refreshed.data.user;
   }
 
   isLogged() {
@@ -29,11 +33,11 @@ export class AuthService {
   }
 
   isAdmin() {
-    return this.user()?.user_metadata?.role === 'admin';
+    return this.user()?.app_metadata?.role === 'admin';
   }
 
   isUser() {
-    return this.user()?.user_metadata?.role === 'user';
+    return this.user()?.app_metadata?.role === 'user';
   }
 
   async register(email: string, password: string, fullName?: string) {
@@ -45,17 +49,13 @@ export class AuthService {
       password: cleanPassword,
       options: {
         data: {
-          role: 'user',
           full_name: fullName ?? '',
-          email_verified: false,
-        },
-      },
+          role: 'user'
+        }
+      }
     });
 
-    if (error) {
-      console.error('Supabase signup error:', error);
-      throw error;
-    }
+    if (error) throw error;
 
     return data.user;
   }

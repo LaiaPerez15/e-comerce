@@ -21,13 +21,14 @@
         <a routerLink="/orders" class="hover:text-blue-400">Mis pedidos</a>
         <button routerLink="/cart" class="relative">
           <span class="material-icons text-2xl">shopping_bag</span>
-           <span *ngIf="totalItems >= 0" class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">
+          <span *ngIf="totalItems >= 0"
+            class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">
             {{ totalItems }}
-           </span>
+          </span>
         </button>
       </ng-container>
 
-      <span class="text-blue-400">{{ auth.user().user_metadata?.full_name }}</span>
+      <span class="text-blue-400">{{ auth.user()?.user_metadata?.full_name }}</span>
 
       <button (click)="logout()" class="hover:text-red-400">Salir</button>
     </ng-container>

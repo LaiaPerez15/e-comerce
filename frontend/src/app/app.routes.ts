@@ -11,6 +11,7 @@ import { Cart } from './features/cart/cart/cart';
 import { Checkout } from './features/checkout/checkout/checkout';
 import { ProductDetail } from './features/catalog/product-detail/product-detail';
 import { CatalogComponent } from './features/catalog/catalog/catalog';
+import { AdminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
     {
@@ -21,8 +22,8 @@ export const routes: Routes = [
             { path: 'catalog', component: CatalogComponent },
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
-            { path: 'admin/products', component: Products },
-            { path: 'admin/orders', component: Orders },
+            { path: 'admin/products', component: Products, canActivate: [AdminGuard] },
+            { path: 'admin/orders', component: Orders, canActivate: [AdminGuard] },
             { path: 'product/:slug', component: ProductDetail },
             { path: 'orders', component: UserOrders },
             { path: 'orders/:id', component: OrderDetail },
