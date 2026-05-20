@@ -26,8 +26,8 @@ export class ProductDetail implements OnInit {
   ) {}
 
   async ngOnInit() {
-    const slug = this.route.snapshot.paramMap.get('slug')!;
-    const data = await this.productService.getById(slug);
+    const id = this.route.snapshot.paramMap.get('id')!;
+    const data = await this.productService.getById(id);
 
     this.product.set(data);
     this.loading.set(false);

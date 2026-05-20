@@ -1,36 +1,54 @@
-<nav class="w-full bg-neutral-900 text-white px-8 py-4 flex items-center justify-between shadow">
-  <div class="text-2xl font-bold">KICKstore</div>
-  <div class="flex items-center gap-8 text-gray-300">
-    <a routerLink="/" class="hover:text-blue-400">Inicio</a>
-    <a routerLink="/catalog" class="hover:text-blue-400">Catálogo</a>
+<nav
+  class="flex flex-col md:flex-row items-center justify-between gap-4 px-6 py-4 bg-black border-b border-pink-600/20 shadow-sm">
+  <a routerLink="/" class="text-2xl font-black tracking-tighter text-white">
+    LAIA<span class="text-pink-500 font-medium">store</span>
+  </a>
+
+  <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-300">
+    <a routerLink="/" routerLinkActive="text-pink-500" [routerLinkActiveOptions]="{ exact: true }"
+      class="transition-colors hover:text-pink-500">Inicio</a>
+    <a routerLink="/catalog" routerLinkActive="text-pink-500" class="transition-colors hover:text-pink-500">Catálogo</a>
+    <ng-container *ngIf="auth.isLogged() && auth.isUser()">
+      <a routerLink="/orders" routerLinkActive="text-pink-500" class="transition-colors hover:text-pink-500">Mis
+        pedidos</a>
+    </ng-container>
+    <ng-container *ngIf="auth.isLogged() && auth.isAdmin()">
+      <a routerLink="/admin/products" routerLinkActive="text-pink-500"
+        class="transition-colors hover:text-pink-500">Admin · Productos</a>
+      <a routerLink="/admin/orders" routerLinkActive="text-pink-500" class="transition-colors hover:text-pink-500">Admin
+        · Pedidos</a>
+    </ng-container>
+  </div>
+
+  <div class="flex items-center gap-4">
+    <ng-container *ngIf="!auth.isAdmin()">
+      <a routerLink="/cart" class="relative text-neutral-300 hover:text-pink-500 transition-colors">
+        <span class="material-icons">shopping_bag</span>
+        <span *ngIf="totalItems > 0"
+          class="absolute -top-2 -right-2 bg-pink-500 text-black text-[10px] font-bold h-5 min-w-[18px] px-1.5 rounded-full flex items-center justify-center">
+          {{ totalItems }}
+        </span>
+      </a>
+    </ng-container>
 
     <ng-container *ngIf="!auth.isLogged()">
       <a routerLink="/login"
-        class="border border-gray-500 px-4 py-2 rounded-lg hover:border-blue-400 hover:text-blue-400">
+        class="px-5 py-2 text-sm font-medium border border-pink-600 rounded-lg text-pink-500 hover:bg-pink-500 hover:text-black transition-all">
         Iniciar sesión
       </a>
     </ng-container>
 
     <ng-container *ngIf="auth.isLogged()">
-      <ng-container *ngIf="auth.isAdmin()">
-        <a routerLink="/admin/products" class="hover:text-amber-400">Admin · Productos</a>
-        <a routerLink="/admin/orders" class="hover:text-amber-400">Admin · Pedidos</a>
-      </ng-container>
-
-      <ng-container *ngIf="auth.isUser()">
-        <a routerLink="/orders" class="hover:text-blue-400">Mis pedidos</a>
-        <button routerLink="/cart" class="relative">
-          <span class="material-icons text-2xl">shopping_bag</span>
-          <span *ngIf="totalItems >= 0"
-            class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">
-            {{ totalItems }}
-          </span>
-        </button>
-      </ng-container>
-
-      <span class="text-blue-400">{{ auth.user()?.user_metadata?.full_name }}</span>
-
-      <button (click)="logout()" class="hover:text-red-400">Salir</button>
+      <div class="hidden sm:flex items-center gap-3 border-l border-pink-600/30 pl-4 text-neutral-300">
+        <div
+          class="w-9 h-9 rounded-full bg-neutral-900 border border-pink-600/30 flex items-center justify-center text-sm font-bold text-pink-500">
+          {{ auth.user()?.user_metadata?.full_name ? auth.user()?.user_metadata?.full_name.charAt(0) :
+          (auth.user()?.email?.charAt(0) || 'U') }}
+        </div>
+        <span class="hidden sm:block text-sm">{{ auth.user()?.user_metadata?.full_name ||
+          auth.user()?.email?.split('@')[0] }}</span>
+      </div>
+      <button (click)="logout()" class="text-sm text-neutral-400 hover:text-pink-500 transition-colors">Salir</button>
     </ng-container>
   </div>
 </nav>

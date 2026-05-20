@@ -24,7 +24,7 @@ export const routes: Routes = [
             { path: 'register', component: RegisterComponent },
             { path: 'admin/products', component: Products, canActivate: [AdminGuard] },
             { path: 'admin/orders', component: Orders, canActivate: [AdminGuard] },
-            { path: 'product/:slug', component: ProductDetail },
+            { path: 'product/:id', component: ProductDetail },
             { path: 'orders', component: UserOrders },
             { path: 'orders/:id', component: OrderDetail },
             { path: 'cart', component: Cart },

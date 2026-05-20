@@ -1,7 +1,7 @@
 import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { supabase } from '../../../core/supabase.client';
 
@@ -18,7 +18,7 @@ export class CatalogComponent implements OnInit {
   loading = signal(true);
 
   searchQuery = signal('');
-  selectedCategory = signal<string | null>(null);
+  selectedCategory = signal<any>(null);
 
   filteredProducts = computed(() => {
     let result = [...this.products()];
@@ -39,10 +39,26 @@ export class CatalogComponent implements OnInit {
     return result;
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
   async ngOnInit() {
     await this.loadCategories();
+
+    this.route.queryParamMap.subscribe(params => {
+      const categoryParam = params.get('category');
+      if (!categoryParam) {
+        this.selectedCategory.set(null);
+        return;
+      }
+
+      const category = this.categories().find(cat => {
+        const slug = (cat.slug ?? cat.name ?? '').toString().toLowerCase().replace(/\s+/g, '-');
+        return slug === categoryParam.toLowerCase() || cat.id === categoryParam;
+      });
+
+      this.selectedCategory.set(category ? category.id : null);
+    });
+
     await this.loadProducts();
   }
 

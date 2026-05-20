@@ -1,92 +1,102 @@
-<div class="min-h-screen bg-neutral-100 px-8 py-12">
-  <div class="max-w-7xl mx-auto mb-10">
-    <div class="flex items-center justify-between">
+<div class="min-h-screen bg-black text-white px-6 lg:px-8 py-16 relative overflow-hidden">
+  <!-- Radial gradients -->
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(236,72,153,0.08),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(236,72,153,0.03),transparent_30%)] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto mb-10 relative z-10">
+    <div class="flex items-center justify-between border-b border-neutral-900 pb-6">
       <div>
-        <span class="text-orange-500 text-xs font-bold tracking-[0.3em] uppercase">
-          Usuario
+        <span class="text-pink-500 text-xs font-bold tracking-[0.3em] uppercase">
+          Compra
         </span>
-        <h1 class="text-4xl font-black text-neutral-900 mt-1 tracking-tight">
+        <h1 class="text-4xl font-black text-white mt-1 tracking-tight">
           Finalizar pedido
         </h1>
       </div>
 
-      <a routerLink="/catalog" class="text-neutral-600 hover:text-neutral-900 text-sm">
-        Seguir comprando →
+      <a routerLink="/catalog" class="text-neutral-400 hover:text-pink-500 text-sm font-semibold transition flex items-center gap-1">
+        Seguir comprando <span class="text-xs">→</span>
       </a>
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
-    <div class="lg:col-span-2 bg-white border border-neutral-200 rounded-2xl p-8 shadow-sm">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10">
+    <!-- Left side: Shipping Details -->
+    <div class="lg:col-span-2 bg-[#080808]/90 border border-neutral-900 rounded-3xl p-8 shadow-2xl backdrop-blur-sm">
+      <h2 class="text-xl font-extrabold text-white mb-6">Dirección de envío</h2>
 
-      <h2 class="text-xl font-black text-neutral-900 mb-6">Dirección de envío</h2>
-
-      <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-5">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
         <div>
-          <label class="text-sm font-semibold text-neutral-700">Nombre completo *</label>
-          <input formControlName="full_name" class="w-full mt-1 px-4 py-2.5 border border-neutral-300 rounded-lg bg-neutral-50" />
-          <p *ngIf="isInvalid('full_name')" class="text-red-600 text-xs mt-1">
+          <label class="text-xs font-black tracking-widest text-neutral-400 uppercase">Nombre completo *</label>
+          <input formControlName="full_name" 
+                 class="w-full mt-1.5 px-4 py-3 bg-neutral-950 border border-neutral-900 rounded-xl focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 text-white transition outline-none" />
+          <p *ngIf="isInvalid('full_name')" class="text-rose-500 text-xs mt-1.5 font-semibold">
             El nombre es obligatorio.
           </p>
         </div>
 
         <div>
-          <label class="text-sm font-semibold text-neutral-700">Dirección *</label>
-          <input formControlName="address" class="w-full mt-1 px-4 py-2.5 border border-neutral-300 rounded-lg bg-neutral-50" />
-          <p *ngIf="isInvalid('address')" class="text-red-600 text-xs mt-1">
+          <label class="text-xs font-black tracking-widest text-neutral-400 uppercase">Dirección *</label>
+          <input formControlName="address" 
+                 class="w-full mt-1.5 px-4 py-3 bg-neutral-950 border border-neutral-900 rounded-xl focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 text-white transition outline-none" />
+          <p *ngIf="isInvalid('address')" class="text-rose-500 text-xs mt-1.5 font-semibold">
             La dirección es obligatoria.
           </p>
         </div>
 
-        <div class="grid grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
-            <label class="text-sm font-semibold text-neutral-700">Ciudad *</label>
-            <input formControlName="city" class="w-full mt-1 px-4 py-2.5 border border-neutral-300 rounded-lg bg-neutral-50" />
-            <p *ngIf="isInvalid('city')" class="text-red-600 text-xs mt-1">
+            <label class="text-xs font-black tracking-widest text-neutral-400 uppercase">Ciudad *</label>
+            <input formControlName="city" 
+                   class="w-full mt-1.5 px-4 py-3 bg-neutral-950 border border-neutral-900 rounded-xl focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 text-white transition outline-none" />
+            <p *ngIf="isInvalid('city')" class="text-rose-500 text-xs mt-1.5 font-semibold">
               La ciudad es obligatoria.
             </p>
           </div>
 
           <div>
-            <label class="text-sm font-semibold text-neutral-700">Código postal *</label>
-            <input formControlName="postal_code" class="w-full mt-1 px-4 py-2.5 border border-neutral-300 rounded-lg bg-neutral-50" />
-            <p *ngIf="isInvalid('postal_code')" class="text-red-600 text-xs mt-1">
+            <label class="text-xs font-black tracking-widest text-neutral-400 uppercase">Código postal *</label>
+            <input formControlName="postal_code" 
+                   class="w-full mt-1.5 px-4 py-3 bg-neutral-950 border border-neutral-900 rounded-xl focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 text-white transition outline-none" />
+            <p *ngIf="isInvalid('postal_code')" class="text-rose-500 text-xs mt-1.5 font-semibold">
               El código postal es obligatorio.
             </p>
           </div>
         </div>
 
         <div>
-          <label class="text-sm font-semibold text-neutral-700">Notas (opcional)</label>
-          <textarea formControlName="notes" class="w-full mt-1 px-4 py-2.5 border border-neutral-300 rounded-lg bg-neutral-50 h-24 resize-none"></textarea>
+          <label class="text-xs font-black tracking-widest text-neutral-400 uppercase">Notas (opcional)</label>
+          <textarea formControlName="notes" 
+                    placeholder="Instrucciones adicionales para el repartidor..."
+                    class="w-full mt-1.5 px-4 py-3 bg-neutral-950 border border-neutral-900 rounded-xl focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 text-white transition h-28 resize-none outline-none"></textarea>
         </div>
 
         <button type="submit"
-                class="mt-4 w-full bg-black text-white font-bold py-3.5 rounded-xl hover:bg-neutral-800 transition shadow-sm">
+                class="mt-4 w-full bg-pink-500 hover:bg-pink-400 text-black font-extrabold py-4 rounded-xl transition shadow-[0_4px_15px_rgba(236,72,153,0.2)] hover:shadow-[0_4px_25px_rgba(236,72,153,0.35)] text-xs tracking-widest uppercase">
           Confirmar pedido
         </button>
       </form>
     </div>
 
-    <div class="bg-white border border-neutral-200 rounded-2xl p-8 shadow-sm h-fit">
-      <h3 class="text-xl font-black text-neutral-900 mb-4">Resumen del pedido</h3>
+    <!-- Right side: Order Summary -->
+    <div class="bg-[#080808]/90 border border-neutral-900 rounded-3xl p-8 shadow-2xl h-fit backdrop-blur-sm">
+      <h3 class="text-xl font-extrabold text-white mb-6">Resumen del pedido</h3>
 
-      <div class="space-y-2 text-neutral-700">
+      <div class="space-y-3 text-neutral-450 text-sm">
         <p class="flex justify-between">
           <span>Productos ({{ items.length }})</span>
-          <span>{{ subtotal }} €</span>
+          <span class="text-white font-semibold">{{ subtotal }} €</span>
         </p>
 
         <p class="flex justify-between">
           <span>Envío</span>
-          <span class="font-medium text-green-600">Gratis</span>
+          <span class="font-bold text-emerald-450">Gratis</span>
         </p>
 
-        <hr class="my-4">
+        <hr class="border-neutral-900 my-4">
 
-        <p class="flex justify-between text-lg font-black text-neutral-900">
+        <p class="flex justify-between text-lg font-black text-white">
           <span>Total</span>
-          <span>{{ subtotal }} €</span>
+          <span class="text-pink-500 text-glow-pink">{{ subtotal }} €</span>
         </p>
       </div>
     </div>

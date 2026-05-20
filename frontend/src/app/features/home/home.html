@@ -1,220 +1,282 @@
-<section class="relative bg-neutral-950 min-h-[92vh] flex flex-col justify-center overflow-hidden">
-
+<section class="relative bg-black min-h-[95vh] flex flex-col justify-center overflow-hidden text-white">
+  <!-- Neon radial gradients -->
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(236,72,153,0.15),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(236,72,153,0.05),transparent_30%)] pointer-events-none"></div>
+  
   <span
-    class="absolute inset-0 flex items-center justify-center text-[22vw] font-black tracking-tighter text-white/3 select-none pointer-events-none leading-none"
-    aria-hidden="true">KICKS</span>
+    class="absolute inset-x-0 top-1/4 flex items-center justify-center text-[22vw] font-black tracking-tighter text-pink-500/[0.03] select-none pointer-events-none leading-none select-none"
+    aria-hidden="true">SNEAKERS</span>
 
-  <div class="absolute left-0 top-0 h-full w-1 bg-orange-500"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-20">
+    <div class="flex flex-col gap-6 text-left">
+      <div class="inline-flex items-center gap-2 bg-pink-500/10 border border-pink-500/20 px-4 py-1.5 rounded-full w-fit">
+        <span class="w-2 h-2 rounded-full bg-pink-500 animate-ping"></span>
+        <span class="text-pink-400 text-xs font-bold tracking-[0.2em] uppercase">
+          Colección Pink Night 2026
+        </span>
+      </div>
 
-  <div class="relative z-10 max-w-7xl mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20">
-
-    <div class="flex flex-col gap-6">
-      <span class="text-orange-500 text-xs font-bold tracking-[0.3em] uppercase">
-        Nueva colección 2026
-      </span>
-
-      <h1 class="text-6xl xl:text-7xl font-black text-white leading-none tracking-tight">
-        Las mejores<br>
-        <span class="text-neutral-500 italic">zapatillas,</span><br>
-        a tu medida
+      <h1 class="text-5xl md:text-6xl xl:text-7xl font-black text-white leading-[1.05] tracking-tight">
+        Define tu paso <br>
+        con un toque<br>
+        <span class="text-pink-500 text-glow-pink">Rosa & Negro</span>
       </h1>
 
-      <p class="text-neutral-400 text-lg leading-relaxed max-w-sm">
-        Running, basketball, lifestyle y training.<br>
-        Encuentra tu par perfecto.
+      <p class="text-neutral-400 text-base md:text-lg leading-relaxed max-w-lg">
+        La selección definitiva de zapatillas exclusivas. Siluetas urbanas y deportivas diseñadas para destacar bajo la luz de la noche con elegancia oscura.
       </p>
 
-      <div class="flex items-center gap-4 mt-2">
+      <div class="flex flex-wrap items-center gap-5 mt-4">
         <a routerLink="/catalog"
-          class="bg-orange-500 hover:bg-orange-400 text-white font-bold px-8 py-3 rounded-lg transition-all duration-200 text-sm tracking-wide">
-          Ver catálogo
+          class="bg-pink-500 hover:bg-pink-400 text-black font-extrabold px-8 py-4 rounded-xl transition-all duration-300 text-sm tracking-widest uppercase shadow-[0_4px_20px_rgba(236,72,153,0.3)] hover:shadow-[0_4px_25px_rgba(236,72,153,0.5)] transform hover:-translate-y-0.5">
+          Explorar Catálogo
         </a>
         <a routerLink="/catalog"
-          class="text-neutral-300 hover:text-white text-sm font-medium transition border-b border-neutral-600 hover:border-white pb-0.5">
-          Novedades →
+          class="text-white hover:text-pink-500 text-sm font-semibold tracking-wider transition-colors duration-200 flex items-center gap-2 group">
+          Ver Novedades
+          <span class="group-hover:translate-x-1.5 transition-transform duration-200">→</span>
         </a>
       </div>
 
-      <div class="flex gap-8 mt-6 pt-6 border-t border-neutral-800">
+      <div class="grid grid-cols-3 gap-6 mt-10 pt-8 border-t border-neutral-900">
         <div>
-          <p class="text-3xl font-black text-white">50+</p>
-          <p class="text-xs text-neutral-500 uppercase tracking-widest mt-0.5">Modelos</p>
+          <p class="text-3xl md:text-4xl font-extrabold text-pink-500 text-glow-pink">12</p>
+          <p class="text-[10px] text-neutral-500 uppercase tracking-widest mt-1">Modelos Únicos</p>
         </div>
-        <div class="w-px bg-neutral-800"></div>
         <div>
-          <p class="text-3xl font-black text-white">4</p>
-          <p class="text-xs text-neutral-500 uppercase tracking-widest mt-0.5">Categorías</p>
+          <p class="text-3xl md:text-4xl font-extrabold text-white">4</p>
+          <p class="text-[10px] text-neutral-500 uppercase tracking-widest mt-1">Categorías</p>
         </div>
-        <div class="w-px bg-neutral-800"></div>
         <div>
-          <p class="text-3xl font-black text-white">Free</p>
-          <p class="text-xs text-neutral-500 uppercase tracking-widest mt-0.5">Envío +99€</p>
+          <p class="text-3xl md:text-4xl font-extrabold text-white">Rápido</p>
+          <p class="text-[10px] text-neutral-500 uppercase tracking-widest mt-1">Envío Asegurado</p>
         </div>
       </div>
     </div>
 
-    <div class="relative flex items-center justify-center">
-      <div class="absolute w-80 h-80 rounded-full bg-orange-500/10 blur-3xl"></div>
-      <div class="relative">
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&q=80" alt="Zapatilla destacada"
-          class="relative z-10 w-full max-w-lg object-contain drop-shadow-2xl rotate-[-8deg] hover:rotate-0 transition-transform duration-700" />
-        <div class="absolute top-4 right-0 z-20 bg-orange-500 text-white rounded-xl px-4 py-3 text-center shadow-xl">
-          <p class="text-2xl font-black leading-none">50+</p>
-          <p class="text-[10px] uppercase tracking-widest mt-1">modelos</p>
+    <!-- Interactive Hero Card Showcase (instead of wireframe) -->
+    <div class="relative flex items-center justify-center lg:justify-end">
+      <!-- Glow background -->
+      <div class="absolute w-72 h-72 rounded-full bg-pink-500/10 blur-[80px] pointer-events-none"></div>
+      
+      <div class="relative w-full max-w-sm group">
+        <!-- Pink glowing border container -->
+        <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-3xl opacity-30 group-hover:opacity-75 blur transition duration-700"></div>
+        
+        <div class="relative rounded-3xl bg-[#080808]/90 border border-pink-500/20 p-6 shadow-2xl backdrop-blur-xl flex flex-col gap-5 overflow-hidden">
+          <!-- Top Badge and Brand logo -->
+          <div class="flex items-center justify-between">
+            <span class="bg-pink-500/20 border border-pink-500/30 text-pink-400 text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-md">
+              MÁS BUSCADA
+            </span>
+            <span class="text-neutral-500 text-xs font-bold">Salomon XT-6</span>
+          </div>
+
+          <!-- Product Image Container -->
+          <div class="relative bg-neutral-950/80 rounded-2xl aspect-[4/3] flex items-center justify-center overflow-hidden border border-neutral-900 group/img">
+            <img src="https://res.cloudinary.com/dldmiairc/image/upload/v1779307701/30618089_61769080_1000.jpg_cl9lw3.webp" 
+                 alt="Salomon XT-6 Mujer - Rosa"
+                 class="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-500 transform -rotate-6 group-hover/img:rotate-0" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+          </div>
+
+          <!-- Info details -->
+          <div>
+            <p class="text-[11px] font-bold text-neutral-500 uppercase tracking-widest">Salomon</p>
+            <h3 class="font-extrabold text-white mt-1 text-lg group-hover:text-pink-400 transition-colors">Salomon XT-6 Mujer - Rosa</h3>
+            <p class="text-neutral-400 text-xs mt-2 line-clamp-2">Zapatilla técnica de alto rendimiento con estética trail moderna en tonos rosados.</p>
+          </div>
+
+          <!-- Action & Price -->
+          <div class="flex items-center justify-between pt-2 border-t border-neutral-900">
+            <div>
+              <p class="text-neutral-500 text-[9px] uppercase tracking-widest">Precio</p>
+              <p class="text-pink-500 font-black text-2xl">179.99 €</p>
+            </div>
+            <a routerLink="/catalog" [queryParams]="{ category: 'training' }"
+               class="bg-white hover:bg-pink-500 hover:text-black text-black font-extrabold px-4 py-2.5 rounded-xl transition-all duration-300 text-xs tracking-wider uppercase">
+              Ver detalles
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="border-t border-neutral-800 overflow-hidden py-3 bg-neutral-900/60">
-    <div class="flex gap-12 animate-[ticker_20s_linear_infinite] whitespace-nowrap w-max">
-      <ng-container *ngFor="let _ of [1,2,3]">
-        <span class="text-neutral-500 text-xs font-bold tracking-[0.25em] uppercase">Running</span>
-        <span class="text-orange-500">·</span>
-        <span class="text-neutral-500 text-xs font-bold tracking-[0.25em] uppercase">Basketball</span>
-        <span class="text-orange-500">·</span>
-        <span class="text-neutral-500 text-xs font-bold tracking-[0.25em] uppercase">Lifestyle</span>
-        <span class="text-orange-500">·</span>
-        <span class="text-neutral-500 text-xs font-bold tracking-[0.25em] uppercase">Training</span>
-        <span class="text-orange-500">·</span>
-        <span class="text-neutral-500 text-xs font-bold tracking-[0.25em] uppercase">Envío gratis +99€</span>
-        <span class="text-orange-500">·</span>
-      </ng-container>
+  <!-- Brands/Collaborators Marquee -->
+  <div class="border-t border-b border-neutral-900 py-6 bg-neutral-950/50 backdrop-blur-md overflow-hidden">
+    <div class="w-full flex items-center relative">
+      <div class="animate-marquee flex gap-16 whitespace-nowrap">
+        <ng-container *ngFor="let _ of [1,2,3,4]">
+          <span class="text-neutral-500 text-sm font-black tracking-[0.3em] uppercase hover:text-pink-500 transition duration-300">NIKE</span>
+          <span class="text-pink-500/40">★</span>
+          <span class="text-neutral-500 text-sm font-black tracking-[0.3em] uppercase hover:text-pink-500 transition duration-300">ADIDAS</span>
+          <span class="text-pink-500/40">★</span>
+          <span class="text-neutral-500 text-sm font-black tracking-[0.3em] uppercase hover:text-pink-500 transition duration-300">NEW BALANCE</span>
+          <span class="text-pink-500/40">★</span>
+          <span class="text-neutral-500 text-sm font-black tracking-[0.3em] uppercase hover:text-pink-500 transition duration-300">ASICS</span>
+          <span class="text-pink-500/40">★</span>
+          <span class="text-neutral-500 text-sm font-black tracking-[0.3em] uppercase hover:text-pink-500 transition duration-300">SALOMON</span>
+          <span class="text-pink-500/40">★</span>
+          <span class="text-neutral-500 text-sm font-black tracking-[0.3em] uppercase hover:text-pink-500 transition duration-300">CONVERSE</span>
+          <span class="text-pink-500/40">★</span>
+        </ng-container>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="bg-neutral-50 py-20 px-8">
+<!-- Beneficios / Por Qué Elegirnos Section -->
+<section class="bg-neutral-950 py-24 px-6 lg:px-8 border-b border-neutral-900 relative">
+  <div class="absolute w-96 h-96 rounded-full bg-pink-500/[0.02] blur-[120px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="text-center max-w-xl mx-auto mb-16">
+      <span class="text-pink-500 text-xs font-bold tracking-[0.3em] uppercase">Garantía LAIAstore</span>
+      <h2 class="text-3xl md:text-4xl font-black text-white mt-2 tracking-tight">Diseñados para tu comodidad</h2>
+      <p class="text-neutral-400 mt-3 text-sm md:text-base">Comprar zapatillas nunca fue tan fácil y seguro. Nos enfocamos en ofrecerte el mejor servicio premium en cada paso.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Card 1 -->
+      <div class="bg-neutral-900/45 border border-neutral-850 p-8 rounded-3xl hover:border-pink-500/30 transition duration-300 group">
+        <div class="w-12 h-12 rounded-2xl bg-pink-500/10 flex items-center justify-center text-pink-500 mb-6 group-hover:bg-pink-500 group-hover:text-black transition-all duration-300">
+          <span class="material-icons">verified</span>
+        </div>
+        <h3 class="text-lg font-extrabold text-white mb-2">100% Originales</h3>
+        <p class="text-neutral-400 text-sm leading-relaxed">Todos nuestros productos son adquiridos directamente de los fabricantes oficiales. Autenticidad garantizada.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-neutral-900/45 border border-neutral-850 p-8 rounded-3xl hover:border-pink-500/30 transition duration-300 group">
+        <div class="w-12 h-12 rounded-2xl bg-pink-500/10 flex items-center justify-center text-pink-500 mb-6 group-hover:bg-pink-500 group-hover:text-black transition-all duration-300">
+          <span class="material-icons">local_shipping</span>
+        </div>
+        <h3 class="text-lg font-extrabold text-white mb-2">Envío Rápido y Seguro</h3>
+        <p class="text-neutral-400 text-sm leading-relaxed">Envío gratis en todos tus pedidos superiores a 99€. Entrega garantizada con seguimiento en tiempo real.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-neutral-900/45 border border-neutral-850 p-8 rounded-3xl hover:border-pink-500/30 transition duration-300 group">
+        <div class="w-12 h-12 rounded-2xl bg-pink-500/10 flex items-center justify-center text-pink-500 mb-6 group-hover:bg-pink-500 group-hover:text-black transition-all duration-300">
+          <span class="material-icons">support_agent</span>
+        </div>
+        <h3 class="text-lg font-extrabold text-white mb-2">Soporte Continuo</h3>
+        <p class="text-neutral-400 text-sm leading-relaxed">¿Tienes dudas sobre tu talla o el estado de tu pedido? Nuestro equipo técnico te atenderá sin esperas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="bg-black py-24 px-6 lg:px-8 text-white relative">
   <div class="max-w-7xl mx-auto">
-    <div class="flex items-end justify-between mb-10">
+    <div class="flex items-end justify-between mb-12 flex-wrap gap-4">
       <div>
-        <span class="text-orange-500 text-xs font-bold tracking-[0.3em] uppercase">Lo mejor de la tienda</span>
-        <h2 class="text-4xl font-black text-neutral-900 mt-1 tracking-tight">Productos destacados</h2>
+        <span class="text-pink-500 text-xs font-bold tracking-[0.3em] uppercase">Nuestra selección especial</span>
+        <h2 class="text-3xl md:text-4xl font-black text-white mt-1 tracking-tight">Productos Destacados</h2>
       </div>
       <a routerLink="/catalog"
-        class="text-sm text-neutral-500 hover:text-orange-500 transition font-medium border-b border-neutral-300 hover:border-orange-400 pb-0.5">
-        Ver todos →
+         class="text-sm text-neutral-400 hover:text-pink-500 transition duration-200 font-semibold flex items-center gap-2 group">
+        Ver catálogo completo
+        <span class="group-hover:translate-x-1 transition-transform duration-200">→</span>
       </a>
     </div>
 
+    <!-- Skeleton loading -->
     <div *ngIf="loadingFeatured()" class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-      <div *ngFor="let i of [1,2,3,4]" class="bg-neutral-200 rounded-2xl h-72 animate-pulse"></div>
+      <div *ngFor="let i of [1,2,3,4]" class="bg-neutral-900/60 rounded-3xl h-80 animate-pulse border border-neutral-850"></div>
     </div>
 
+    <!-- Products list -->
     <div *ngIf="!loadingFeatured()" class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-      <a *ngFor="let p of featuredProducts()" [routerLink]="['/products', p.id]"
-        class="group bg-white rounded-2xl overflow-hidden border border-neutral-200 hover:border-orange-400 hover:shadow-xl transition-all duration-300 cursor-pointer">
-        <div class="relative bg-neutral-100 overflow-hidden aspect-square">
+      <a *ngFor="let p of featuredProducts()" [routerLink]="['/product', p.id]"
+        class="group bg-neutral-950 rounded-3xl overflow-hidden border border-neutral-900 hover:border-pink-500/50 hover:shadow-[0_15px_40px_rgba(236,72,153,0.15)] transition-all duration-300 flex flex-col justify-between">
+        
+        <!-- Image with badge -->
+        <div class="relative bg-neutral-900 overflow-hidden aspect-square flex items-center justify-center border-b border-neutral-900">
           <span
-            class="absolute top-3 left-3 z-10 text-[10px] font-black tracking-widest uppercase bg-neutral-900 text-white px-2.5 py-1 rounded-md">
+            class="absolute top-3 left-3 z-10 text-[9px] font-black tracking-widest uppercase bg-black/80 border border-neutral-800 text-pink-400 px-2.5 py-1 rounded-md">
             {{ p.categories?.name }}
           </span>
-          <img [src]="p.image_url || 'assets/placeholder.jpg'" [alt]="p.name"
+          <img [src]="p.image_url || 'assets/placeholder.png'" [alt]="p.name"
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
           <div
-            class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">
-            <span class="bg-orange-500 text-white text-xs font-bold px-4 py-2 rounded-lg shadow">
-              Ver producto →
+            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="bg-pink-500 text-black text-xs font-black tracking-wider uppercase px-4 py-2.5 rounded-xl shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-350">
+              Ver modelo
             </span>
           </div>
         </div>
-        <div class="p-4">
-          <p class="text-[11px] font-bold text-neutral-400 uppercase tracking-widest">{{ p.brand }}</p>
-          <p class="font-bold text-neutral-900 mt-0.5 text-sm leading-tight">{{ p.name }}</p>
-          <p class="text-orange-500 font-black text-lg mt-2">{{ p.price | number:'1.2-2' }} €</p>
+
+        <!-- Info details -->
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <p class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">{{ p.brand }}</p>
+            <h3 class="font-extrabold text-white mt-1 text-sm md:text-base leading-tight group-hover:text-pink-400 transition-colors line-clamp-1">{{ p.name }}</h3>
+          </div>
+          <p class="text-pink-500 font-black text-lg md:text-xl mt-3">{{ p.price | number:'1.2-2' }} €</p>
         </div>
       </a>
     </div>
   </div>
 </section>
 
-<div class="bg-neutral-950 px-8 py-16 relative overflow-hidden">
+<!-- Promo / Shipping Banner -->
+<div class="bg-black border-t border-b border-neutral-900 px-6 py-20 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-r from-pink-500/5 to-transparent pointer-events-none"></div>
   <span
-    class="absolute right-8 top-1/2 -translate-y-1/2 text-[10vw] font-black text-white/4 tracking-tighter select-none pointer-events-none"
-    aria-hidden="true">FREE SHIP</span>
-  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
-    <div>
-      <p class="text-orange-500 text-xs font-bold uppercase tracking-widest mb-2">Oferta permanente</p>
-      <h3 class="text-3xl font-black text-white">Envío gratis en pedidos superiores a 99 €</h3>
-      <p class="text-neutral-400 mt-2">Sin sorpresas al pagar. Lo que ves, es lo que pagas.</p>
+    class="absolute right-8 top-1/2 -translate-y-1/2 text-[12vw] font-black text-pink-500/[0.01] tracking-tighter select-none pointer-events-none select-none leading-none"
+    aria-hidden="true">FREE SHIPPING</span>
+  
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+    <div class="text-left">
+      <p class="text-pink-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Oferta Permanente</p>
+      <h3 class="text-3xl font-black text-white tracking-tight">Envío gratis en todos tus pedidos superiores a 99 €</h3>
+      <p class="text-neutral-400 mt-2 text-sm max-w-xl">Disfruta de envíos rápidos directos a tu puerta. Devoluciones garantizadas y embalaje ecológico seguro.</p>
     </div>
     <a routerLink="/catalog"
-      class="shrink-0 bg-orange-500 hover:bg-orange-400 text-white font-bold px-8 py-3 rounded-lg transition text-sm tracking-wide">
-      Ir al catálogo
+      class="shrink-0 bg-white hover:bg-pink-500 hover:text-black text-black font-extrabold px-8 py-4 rounded-xl transition-all duration-300 text-xs tracking-widest uppercase shadow-md hover:shadow-lg">
+      Ver Catálogo Completo
     </a>
   </div>
 </div>
 
-<section class="bg-neutral-900 py-20 px-8">
+<!-- Categories Grid Section -->
+<section class="bg-neutral-950 py-24 px-6 lg:px-8 border-b border-neutral-900">
   <div class="max-w-7xl mx-auto">
-    <div class="mb-10">
-      <span class="text-orange-500 text-xs font-bold tracking-[0.3em] uppercase">Explora por estilo</span>
-      <h2 class="text-4xl font-black text-white mt-1 tracking-tight">Comprar por categoría</h2>
+    <div class="text-center max-w-xl mx-auto mb-16">
+      <span class="text-pink-500 text-xs font-bold tracking-[0.3em] uppercase">Estilos y Categorías</span>
+      <h2 class="text-3xl md:text-4xl font-black text-white mt-2 tracking-tight">Comprar por categoría</h2>
+      <p class="text-neutral-400 mt-3 text-sm">Filtra por tu estilo favorito y encuentra las zapatillas ideales para cada ocasión.</p>
     </div>
 
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
       <ng-container *ngFor="let cat of [
-        { slug:'basketball', emoji:'🏀', name:'Basketball', desc:'Soporte de tobillo para la cancha' },
-        { slug:'lifestyle',  emoji:'🌆', name:'Lifestyle',  desc:'Zapatillas urbanas para el día a día' },
-        { slug:'running',    emoji:'🏃', name:'Running',    desc:'Alto rendimiento para corredores' },
-        { slug:'training',   emoji:'💪', name:'Training',   desc:'Calzado versátil para el gimnasio' }
+        { id:'b3017e09-1cd9-4718-9d87-69aae1ffa1f0', slug:'running',    emoji:'🏃', name:'Running',    desc:'Rendimiento óptimo para corredores' },
+        { id:'18733bbd-ff0f-442a-b179-599acafcace6', slug:'basketball', emoji:'🏀', name:'Basketball', desc:'Soporte y tracción máxima en cancha' },
+        { id:'1f96a607-7e07-4ff5-b4e4-aef831f3d9bc', slug:'lifestyle',  emoji:'🌆', name:'Lifestyle',  desc:'Zapatillas casuales de uso urbano' },
+        { id:'85eff643-1876-4f49-a44b-2c164b7758cf', slug:'training',   emoji:'💪', name:'Training',   desc:'Calzado versátil de gimnasio' }
       ]">
         <a [routerLink]="['/catalog']" [queryParams]="{ category: cat.slug }"
-          class="group relative bg-neutral-800 hover:bg-neutral-750 rounded-2xl p-6 border border-neutral-700 hover:border-orange-500 transition-all duration-300 flex flex-col gap-4 overflow-hidden">
-          <div
-            class="absolute top-0 right-0 w-24 h-24 bg-orange-500/5 rounded-bl-full group-hover:bg-orange-500/10 transition">
-          </div>
-          <div
-            class="w-10 h-10 rounded-xl bg-neutral-700 group-hover:bg-orange-500/20 transition flex items-center justify-center text-xl">
+          class="group relative bg-[#090909] hover:bg-neutral-900 rounded-3xl p-6 border border-neutral-900 hover:border-pink-500/40 transition-all duration-300 flex flex-col gap-4 overflow-hidden shadow-sm">
+          
+          <div class="absolute top-0 right-0 w-24 h-24 bg-pink-500/[0.02] rounded-bl-full group-hover:bg-pink-500/[0.06] transition-all duration-300"></div>
+          
+          <!-- Emoji Wrapper -->
+          <div class="w-12 h-12 rounded-2xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-2xl group-hover:bg-pink-500/10 group-hover:border-pink-500/20 transition-all duration-300">
             {{ cat.emoji }}
           </div>
+
           <div>
-            <h3 class="font-black text-white text-lg">{{ cat.name }}</h3>
-            <p class="text-neutral-400 text-sm mt-1">{{ cat.desc }}</p>
+            <h3 class="font-extrabold text-white text-base md:text-lg group-hover:text-pink-400 transition-colors">{{ cat.name }}</h3>
+            <p class="text-neutral-400 text-xs mt-1.5 leading-relaxed">{{ cat.desc }}</p>
           </div>
-          <span class="text-orange-500 text-xs font-bold tracking-wide">Explorar →</span>
+          
+          <div class="text-pink-500 text-xs font-black tracking-wider uppercase mt-2 flex items-center gap-1.5">
+            Explorar
+            <span class="group-hover:translate-x-1.5 transition-transform duration-200">→</span>
+          </div>
         </a>
       </ng-container>
     </div>
   </div>
 </section>
-
-<footer class="bg-neutral-950 border-t border-neutral-800 px-8 pt-14 pb-8">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
-    <div>
-      <p class="text-2xl font-black text-white">KICK<span class="text-orange-500">store</span></p>
-      <p class="text-neutral-400 text-sm mt-3 leading-relaxed max-w-xs">
-        Las mejores zapatillas, a tu medida. Envío gratis en pedidos superiores a 99 €.
-      </p>
-    </div>
-
-    <div>
-      <h4 class="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-4">Tienda</h4>
-      <div class="flex flex-col gap-2">
-        <a routerLink="/catalog" class="text-neutral-300 hover:text-orange-500 text-sm transition">Catálogo</a>
-        <a [routerLink]="['/catalog']" [queryParams]="{ category: 'running' }"
-          class="text-neutral-300 hover:text-orange-500 text-sm transition">Running</a>
-        <a [routerLink]="['/catalog']" [queryParams]="{ category: 'basketball' }"
-          class="text-neutral-300 hover:text-orange-500 text-sm transition">Basketball</a>
-        <a [routerLink]="['/catalog']" [queryParams]="{ category: 'lifestyle' }"
-          class="text-neutral-300 hover:text-orange-500 text-sm transition">Lifestyle</a>
-      </div>
-    </div>
-
-    <div>
-      <h4 class="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-4">Mi cuenta</h4>
-      <div class="flex flex-col gap-2">
-        <a routerLink="/login" class="text-neutral-300 hover:text-orange-500 text-sm transition">Iniciar sesión</a>
-        <a routerLink="/register" class="text-neutral-300 hover:text-orange-500 text-sm transition">Crear cuenta</a>
-        <ng-container *ngIf="auth.isLogged() && !auth.isAdmin()">
-          <a routerLink="/orders" class="text-neutral-300 hover:text-orange-500 text-sm transition">Mis pedidos</a>
-          <a routerLink="/cart" class="text-neutral-300 hover:text-orange-500 text-sm transition">Carrito</a>
-        </ng-container>
-      </div>
-    </div>
-
-  </div>
-  <div class="border-t border-neutral-800 pt-6 text-center">
-    <p class="text-neutral-600 text-xs">© 2026 KICKstore. Todos los derechos reservados.</p>
-  </div>
-</footer>
